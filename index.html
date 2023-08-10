@@ -1,14 +1,512 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-    </head>
-    <body>
-        <a1>
-            CLE Diffusion: Controllable Light Enhancement Diffusion Model
-        </a1>
-        <p>
-            Our code will release soon.
-        </p>
-    </body>
-</html>
+<head>
+  <meta charset="utf-8">
+  <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
+  <!-- Replace the content tag with appropriate information -->
+  <meta name="description" content="Project Page About CLE Diffusion: Controllable Light Enhancement Diffusion Model">
+  <meta property="og:title" content="CLE Diffusion: Controllable Light Enhancement Diffusion Model"/>
+  <meta property="og:description" content="Project Page About CLE Diffusion: Controllable Light Enhancement Diffusion Model"/>
+  <meta property="og:url" content=" https://yuyangyin.github.io/CLEDiffusion/"/>
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
+  <meta property="og:image" content="static/image/framework.png" />
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+
+
+<!--  <meta name="twitter:title" content="TWITTER BANNER TITLE META TAG">-->
+<!--  <meta name="twitter:description" content="TWITTER BANNER DESCRIPTION META TAG">-->
+<!--  &lt;!&ndash; Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600&ndash;&gt;-->
+<!--  <meta name="twitter:image" content="static/images/your_twitter_banner_image.png">-->
+<!--  <meta name="twitter:card" content="summary_large_image">-->
+  <!-- Keywords for your paper to be indexed by-->
+  <meta name="keywords" content="image processing, low light image enhancement, diffusion model">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <title>CLE Diffusion: Controllable Light Enhancement Diffusion Model(ACM MM 2023)</title>
+<!--  更换图标为bjtu-->
+  <link rel="icon" type="image/x-icon" href="static/images/logo.png">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+  rel="stylesheet">
+
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script src="static/js/bulma-carousel.min.js"></script>
+  <script src="static/js/bulma-slider.min.js"></script>
+  <script src="static/js/index.js"></script>
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=AM_HTMLorMML-full"></script>
+  <script type="text/javascript" async
+          src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+  </script>
+
+</head>
+<body>
+
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">CLE Diffusion: Controllable Light Enhancement Diffusion Model(MM 2023)</h1>
+            <div class="is-size-5 publication-authors">
+              <!-- Paper authors -->
+              <span class="author-block">
+                <a href="https://yuyangyin.github.io/" target="_blank">Yuyang Yin</a><sup>1</sup><sup>,2</sup>,</span>
+
+              <span class="author-block">
+                <a href="https://ir1d.github.io/" target="_blank">Dejia Xu</a><sup>3</sup>,</span>
+
+              <span class="author-block">
+                Chuangchuang Tan<sup>1</sup><sup>,2</sup>,</span>
+<!--                <a href="https://ir1d.github.io/" target="_blank">Chuangchuang Tan</a><sup>3</sup>,</span>-->
+
+              <span class="author-block">
+                <a href="https://sites.google.com/site/pingliu264/" target="_blank">Ping Liu</a><sup>4</sup>,</span>
+
+              <span class="author-block">
+                <a href="http://faculty.bjtu.edu.cn/5900/" target="_blank">Yao Zhao</a><sup>1</sup><sup>,2</sup>,</span>
+
+              <span class="author-block">
+                <a href="https://weiyc.github.io/index.html" target="_blank">Yunchao Wei</a><sup>1</sup><sup>,2</sup>,</span>
+
+                  </div>
+
+                  <div class="is-size-5 publication-authors">
+                    <span class="author-block"><br><sup>1</sup>Institute of Information Science, Beijing Jiaotong University<br></span>
+                    <span class="author-block"><br><sup>2</sup>Beijing Key Laboratory of Advanced Information Science and Network Technology<br></span>
+                    <span class="author-block"><br><sup>3</sup>VITA Group, University of Texas at Austin<br></span>
+                    <span class="author-block"><br><sup>4</sup>Center for Frontier AI Research, IHPC, A*STAR<br></span>
+<!--                    <span class="eql-cntrb"><small><br><sup>*</sup>Indicates Equal Contribution</small></span>-->
+                  </div>
+
+                  <div class="column has-text-centered">
+                    <div class="publication-links">
+                         <!-- Arxiv PDF link -->
+                      <span class="link-block">
+                        <a href="https://arxiv.org/pdf/<ARXIV PAPER ID>.pdf" target="_blank"
+                        class="external-link button is-normal is-rounded is-dark">
+                        <span class="icon">
+                          <i class="fas fa-file-pdf"></i>
+                        </span>
+                        <span>Paper</span>
+                      </a>
+                    </span>
+
+                    <!-- Supplementary PDF link -->
+<!--                    <span class="link-block">-->
+<!--                      <a href="static/pdfs/supplementary_material.pdf" target="_blank"-->
+<!--                      class="external-link button is-normal is-rounded is-dark">-->
+<!--                      <span class="icon">-->
+<!--                        <i class="fas fa-file-pdf"></i>-->
+<!--                      </span>-->
+<!--                      <span>Supplementary</span>-->
+<!--                    </a>-->
+<!--                  </span>-->
+
+                  <!-- Github link -->
+                  <span class="link-block">
+                    <a href="https://github.com/YuyangYin/CLEDiffusion" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code</span>
+                  </a>
+                </span>
+
+                <!-- ArXiv abstract Link -->
+<!--                <span class="link-block">-->
+<!--                  <a href="https://arxiv.org/abs/<ARXIV PAPER ID>" target="_blank"-->
+<!--                  class="external-link button is-normal is-rounded is-dark">-->
+<!--                  <span class="icon">-->
+<!--                    <i class="ai ai-arxiv"></i>-->
+<!--                  </span>-->
+<!--                  <span>arXiv</span>-->
+<!--                </a>-->
+<!--              </span>-->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Teaser video-->
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <video poster="" id="tree" autoplay controls muted loop height="100%">
+        <!-- Your video here -->
+        <source src="static/videos/total.mp4"
+        type="video/mp4">
+      </video>
+<!--      <h2 class="subtitle has-text-centered">-->
+<!--        Aliquam vitae elit ullamcorper tellus egestas pellentesque. Ut lacus tellus, maximus vel lectus at, placerat pretium mi. Maecenas dignissim tincidunt vestibulum. Sed consequat hendrerit nisl ut maximus. -->
+<!--      </h2>-->
+    </div>
+  </div>
+</section>
+<!-- End teaser video -->
+
+<!-- Paper abstract -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+
+            Low light enhancement has gained increasing importance with the rapid development of visual creation and editing.
+            However, most existing enhancement algorithms are designed to homogeneously increase the brightness of images to a pre-defined extent, limiting the user experience.
+            To address this issue, we propose Controllable Light Enhancement Diffusion Model, dubbed CLE Diffusion,
+            a novel diffusion framework to provide users with rich controllability. Built with a conditional diffusion model,
+            we introduce an illumination embedding to let users control their desired brightness level.
+            Additionally, we incorporate the Segment-Anything Model (SAM) to enable user-friendly region controllability,
+            where users can click on objects to specify the regions they wish to enhance.
+            Extensive experiments demonstrate that CLE Diffusion achieves competitive performance regarding quantitative metrics, qualitative results, and versatile controllability.
+
+
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End paper abstract -->
+
+
+  <section class="hero is-small">
+    <div class="hero-body">
+      <div class="container">
+
+        <h2 class="title is-3">Method</h2>
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <div class="item" >
+              <img src="static/images/framework.png" alt="MY ALT TEXT">
+              <div class="content has-text-justified">
+
+                <div class="formula">
+                  <p>
+                  During training, we randomly sample a pair of low-light image <span>`x`</span> and normal-light image `y`. We then construct `y_t`, color map `C(x)`, and snr map `S(x)` as additional inputs to the diffusion model.
+                  We extract brightness level `\lambda` of normal-light image by cacluating the average pixel value. Then `\lambda` is injected into the Brightness Control Modules to enable seamless and consistent brightness control.
+                  Alongside <span>`L_\text{simple}`</span>, we introduce auxiliary losses on the denoised estimate `\hat{y_0}` to provide better supervision for the model.
+                  </p>
+                  <p>
+                    To achieve regional controllability,  We incorporate a binary mask `M` into our diffusion model by
+                    concatenating the mask with the original inputs. To accommodate
+                    this requirement, we created synthetic training data by randomly
+                    sampling free-form masks with feathered boundaries. The
+                    target images are generated by alpha blending the low-light and
+                    normal-light images from existing low-light datasets.
+                  </p>
+                  <p>
+
+                  </p>
+                </div>
+
+                <div style="display: flex; justify-content: center;">
+                <img src="static/images/Algorithm.png " alt="MY ALT TEXT"  style="width: auto; height: 250px;"></div>
+                <div class="content has-text-justified">
+
+                  <div class="formula">
+
+                    <p>
+                      The sampling process is implemented with DDIM sampler. We use classifier free guide method to estimate two noise from a
+                      conditional model and a unconditional model. Armed with SAM, CLE Diffusion achieve light enhancement with specified regions and designated levels of brightness.
+                    </p>
+                  </div>
+
+
+              </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="hero is-small is-light">
+    <div class="hero-body">
+      <div class="container">
+
+        <h2 class="title is-3"> Qualitative Results</h2>
+        <div class="columns is-centered has-text-centered">
+
+          <div class="column is-four-fifths">
+
+
+              <div class="item" >
+                <img src="static/images/lolmittable.png" alt="MY ALT TEXT">
+
+              </div>
+
+<!--              <div class="item">-->
+<!--                <img src="static/images/mittable2.png" alt="MY ALT TEXT" style="width: auto; height: 250px;">-->
+<!--&lt;!&ndash;                <h2 class="subtitle has-text-centered">&ndash;&gt;-->
+<!--&lt;!&ndash;                  Table 2: Comparisons on the MIT-Adobe FiveK dataset.&ndash;&gt;-->
+<!--&lt;!&ndash;                </h2>&ndash;&gt;-->
+<!--              </div>-->
+
+
+<!--            <h2>-->
+<!--              Existing quantitative metrics typically assume the existence of an ideal brightness level, making it difficult to compare images with-->
+<!--              different brightness levels fairly. We introduce a novel metric named <strong>LI-LPIPS</strong>, which is more stable when brightness changes and better assesses image quality.-->
+<!--            </h2>-->
+          </div>
+
+
+        </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+<!-- Image carousel -->
+<section class="hero is-small">
+  <div class="hero-body">
+
+    <div class="container">
+      <h2 class="title is-3">Visual Results</h2>
+<!--      <div id="results-carousel" class="carousel results-carousel">-->
+       <div class="item">
+        <!-- Your image here -->
+        <img src="static/images/RegionControl1.png" alt="MY ALT TEXT"/>
+        <h2 class="subtitle has-text-centered">
+          Figure 1: CLE Diffusion enables users to select regions of interest(ROI) with a simple click and adjust the degree of brightness
+          enhancement as desired, while MAXIM [1] is limited to homogeneously enhancing images to a pre-defined level of brightness.
+        </h2>
+      </div>
+
+
+
+      <div class="item">
+        <!-- Your image here -->
+        <img src="static/images/RegionControl2.png" alt="MY ALT TEXT"/>
+        <h2 class="subtitle has-text-centered">
+          Figure 2: More cases about region controllable light enhancement. Equipped with the Segment-Anything Model (SAM), users
+          can designate regions of interest (ROI) using simple inputs like points or boxes. Our model facilitates controllable light
+          enhancement within these regions, producing results that blend naturally and seamlessly with the surrounding environment.
+        </h2>
+      </div>
+
+      <div class="item">
+        <!-- Your image here -->
+        <img src="static/images/GlobalControl1.png" alt="MY ALT TEXT"/>
+        <h2 class="subtitle has-text-centered">
+          Figure 3: Visual results of global brightness control on LOL dataset. By adjusting the brightness levels during inference, we can sample images
+          with varying degrees of brightness while maintaining high image quality
+       </h2>
+     </div>
+
+     <div class="item">
+      <!-- Your image here -->
+      <img src="static/images/GlobalControl2.png" alt="MY ALT TEXT"/>
+      <h2 class="subtitle has-text-centered">
+        Figure 4: Global Controllable Light Enhancement on MIT-Adobe FiveK dataset. Our method enables users to select various
+        brightness levels, even significantly brighter than the ground truth.
+      </h2>
+    </div>
+
+        <div class="item">
+          <!-- Your image here -->
+          <img src="static/images/LOL.png" alt="MY ALT TEXT"/>
+          <h2 class="subtitle has-text-centered">
+            Figure 5: Results on LOL [2] test dataset. Our result exhibits fewer artifacts and is more consistent with the ground truth image.
+          </h2>
+        </div>
+
+      <div class="item">
+        <!-- Your image here -->
+        <img src="static/images/mit.png" alt="MY ALT TEXT"/>
+        <h2 class="subtitle has-text-centered">
+          Figure 6: Results on MIT-Adobe FiveK [3] test dataset. Our result exhibits less color distortion and contains richer details,
+          which are more consistent with the ground truth.
+        </h2>
+      </div>
+
+      <div class="item">
+        <!-- Your image here -->
+        <img src="static/images/velol.png" alt="MY ALT TEXT"/>
+        <h2 class="subtitle has-text-centered">
+          Figure 7: Comparisons on a real-world image from VE-LOL dataset [4]. Other methods often rely on well-lit brightness
+          extracted from pre-existing datasets, limiting their applicability to diverse scenarios. Unlike most methods that struggle to
+          enhance the brightness at night sufficiently, our method incorporates a brightness control module, allowing us to sample
+          images with higher brightness that appear more natural in such situations.
+        </h2>
+      </div>
+
+
+      <div class="item">
+        <!-- Your image here -->
+        <img src="static/images/highlight.png" alt="MY ALT TEXT"/>
+        <h2 class="subtitle has-text-centered">
+          Figure 8: Performance on normal light image inputs. We utilize the normal-light images from the LOL dataset as inputs to
+          evaluate the models’ capability in handling high-light images. HWMNet and MAXIM exhibit overexposure in certain regions,
+          resulting in considerably over-exposed images. LLFlow produces blurred images, while other methods result in color distortion.
+          Our method achieves visually pleasing results in terms of color and brightness.
+        </h2>
+      </div>
+
+      <div class="item">
+        <!-- Your image here -->
+        <img src="static/images/recoro.png" alt="MY ALT TEXT"/>
+        <h2 class="subtitle has-text-centered">
+          Figure 9: Global brightness control compared with ReCoRo [5]. While ReCoRo is constrained to enhancing images with
+          brightness levels that fall between low-light and “well-lit” images, our model can handle a wider range of brightness levels. It
+          can be adjusted to sample any desired brightness, providing greater flexibility and control over different lighting conditions.
+        </h2>
+      </div>
+
+      <div class="item">
+        <!-- Your image here -->
+        <img src="static/images/sam.png" alt="MY ALT TEXT"/>
+        <h2 class="subtitle has-text-centered">
+          Figure 10: Performance on Segment-Anything model. SAM generates coarse masks when dealing with images captured in
+          low-light conditions. After enhancing with our model, the images can be effectively segmented even in dark environments.
+          This demonstrates our model’s ability to restore details that are friendly to high-level machine vision models.
+        </h2>
+      </div>
+
+  </div>
+</div>
+</div>
+</section>
+<!-- End image carousel -->
+
+
+
+
+<!--&lt;!&ndash; Youtube video &ndash;&gt;-->
+<!--<section class="hero is-small is-light">-->
+<!--  <div class="hero-body">-->
+<!--    <div class="container">-->
+<!--      &lt;!&ndash; Paper video. &ndash;&gt;-->
+<!--      <h2 class="title is-3">Video Presentation</h2>-->
+<!--      <div class="columns is-centered has-text-centered">-->
+<!--        <div class="column is-four-fifths">-->
+<!--          -->
+<!--          <div class="publication-video">-->
+<!--            &lt;!&ndash; Youtube embed code here &ndash;&gt;-->
+<!--            <iframe src="https://www.youtube.com/embed/JkaxUblCGz0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</section>-->
+<!--&lt;!&ndash; End youtube video &ndash;&gt;-->
+
+
+<!--&lt;!&ndash; Video carousel &ndash;&gt;-->
+<!--<section class="hero is-small">-->
+<!--  <div class="hero-body">-->
+<!--    <div class="container">-->
+<!--      <h2 class="title is-3">Another Carousel</h2>-->
+<!--      <div id="results-carousel" class="carousel results-carousel">-->
+<!--        <div class="item item-video1">-->
+<!--          <video poster="" id="video1" autoplay controls muted loop height="100%">-->
+<!--            &lt;!&ndash; Your video file here &ndash;&gt;-->
+<!--            <source src="static/videos/carousel1.mp4"-->
+<!--            type="video/mp4">-->
+<!--          </video>-->
+<!--        </div>-->
+<!--        <div class="item item-video2">-->
+<!--          <video poster="" id="video2" autoplay controls muted loop height="100%">-->
+<!--            &lt;!&ndash; Your video file here &ndash;&gt;-->
+<!--            <source src="static/videos/carousel2.mp4"-->
+<!--            type="video/mp4">-->
+<!--          </video>-->
+<!--        </div>-->
+<!--        <div class="item item-video3">-->
+<!--          <video poster="" id="video3" autoplay controls muted loop height="100%">\-->
+<!--            &lt;!&ndash; Your video file here &ndash;&gt;-->
+<!--            <source src="static/videos/carousel3.mp4"-->
+<!--            type="video/mp4">-->
+<!--          </video>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</section>-->
+<!--&lt;!&ndash; End video carousel &ndash;&gt;-->
+
+
+
+
+
+
+<!--&lt;!&ndash; Paper poster &ndash;&gt;-->
+<!--<section class="hero is-small is-light">-->
+<!--  <div class="hero-body">-->
+<!--    <div class="container">-->
+<!--      <h2 class="title">Poster</h2>-->
+
+<!--&lt;!&ndash;      <iframe  src="static/pdfs/sample.pdf" width="100%" height="550">&ndash;&gt;-->
+<!--&lt;!&ndash;          </iframe>&ndash;&gt;-->
+<!--        -->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </section>-->
+<!--&lt;!&ndash;End paper poster &ndash;&gt;-->
+
+
+<!--BibTex citation -->
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title">BibTeX</h2>
+      <pre><code>
+        [1] Zhengzhong Tu, Hossein Talebi, Han Zhang, Feng Yang, Peyman Milanfar, Alan Bovik, and Yinxiao Li. 2022. Maxim: Multi-axis mlp for image processing. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition.5769–5780.
+        [2] Wei Chen, Wang Wenjing, Yang Wenhan, and Liu Jiaying. 2018. Deep Retinex Decomposition for Low-Light Enhancement. In British Machine Vision Conference.British Machine Vision Association.
+        [3] Vladimir Bychkovsky, Sylvain Paris, Eric Chan, and Frédo Durand. 2011. Learning Photographic Global Tonal Adjustment with a Database of Input / Output Image Pairs. In The Twenty-Fourth IEEE Conference on Computer Vision and Pattern Recognition.
+        [4] Jiaying Liu, Dejia Xu, Wenhan Yang, Minhao Fan, and Haofeng Huang. 2021. Benchmarking low-light image enhancement and beyond. International Journal of Computer Vision 129 (2021), 1153–1184.
+        [5] Dejia Xu, Hayk Poghosyan, Shant Navasardyan, Yifan Jiang, Humphrey Shi, and Zhangyang Wang. 2022. ReCoRo: Region-Controllable Robust Light Enhancement with User-Specified Imprecise Masks. In Proceedings of the 30th ACM International Conference on Multimedia. 1376–1386.
+      </code></pre>
+    </div>
+</section>
+<!--End BibTex citation -->
+
+
+  <footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+
+          <p>
+            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a>.
+<!--            You are free to borrow the of this website, we just ask that you link back to this page in the footer. <br> This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative-->
+<!--            Commons Attribution-ShareAlike 4.0 International License</a>.-->
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Statcounter tracking code -->
+  
+<!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
+
+    <!-- End of Statcounter Code -->
+
+  </body>
+  </html>
