@@ -205,7 +205,7 @@
                   <p>
                   During training, we randomly sample a pair of low-light image <span>`x`</span> and normal-light image `y`. We then construct `y_t`, color map `C(x)`, and snr map `S(x)` as additional inputs to the diffusion model.
                   We extract brightness level `\lambda` of normal-light image by cacluating the average pixel value. Then `\lambda` is injected into the Brightness Control Modules to enable seamless and consistent brightness control.
-                  Alongside <span>`L_\text{simple}`</span>, we introduce auxiliary losses on the denoised estimate `\hat{y_0}` to provide better supervision for the model.
+                  Alongside <span>$L_\text{simple}$</span>, we introduce auxiliary losses on the denoised estimate `\hat{y_0}` to provide better supervision for the model.
                   </p>
                   <p>
                     To achieve regional controllability,  We incorporate a binary mask `M` into our diffusion model by
