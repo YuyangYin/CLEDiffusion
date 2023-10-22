@@ -10,9 +10,9 @@
 
 # To Do List
 
-\- [x] LOL dataset output
+\- [x] LOL dataset outputs
 
-\- [ ] release train and text code
+\- [ ] release train and test code
 
 \- [ ] release Mask CLE Diffusion code
 
