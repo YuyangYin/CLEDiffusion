@@ -69,7 +69,7 @@ class load_data(data.Dataset):
         data_max_g = data_low[1].max()
         data_max_b = data_low[2].max()
         color_max=torch.zeros((data_low.shape[0],data_low.shape[1],data_low.shape[2]))
-        color_max[0,:,:]=data_max_r*torch.ones((data_low.shape[1],data_low.shape[2]))    #这里之前都写错了，应该从color_max[0:,:]改为color_max[0,:,:]
+        color_max[0,:,:]=data_max_r*torch.ones((data_low.shape[1],data_low.shape[2]))    
         color_max[1,:, :] = data_max_g * torch.ones((data_low.shape[1], data_low.shape[2]))
         color_max[2,:, :] = data_max_b * torch.ones((data_low.shape[1], data_low.shape[2]))
         data_color=data_low/(color_max+ 1e-6)
@@ -126,7 +126,7 @@ class load_data_test(data.Dataset):
         data_max_g = data_low[1].max()
         data_max_b = data_low[2].max()
         color_max=torch.zeros((data_low.shape[0],data_low.shape[1],data_low.shape[2]))
-        color_max[0,:,:]=data_max_r*torch.ones((data_low.shape[1],data_low.shape[2]))    #这里之前都写错了，应该从color_max[0:,:]改为color_max[0,:,:]
+        color_max[0,:,:]=data_max_r*torch.ones((data_low.shape[1],data_low.shape[2]))    
         color_max[1,:, :] = data_max_g * torch.ones((data_low.shape[1], data_low.shape[2]))
         color_max[2,:, :] = data_max_b * torch.ones((data_low.shape[1], data_low.shape[2]))
         data_color=data_low/(color_max+ 1e-6)
@@ -322,14 +322,14 @@ def train(modelConfig: Dict):
                 modelConfig["save_weight_dir"], 'ckpt_' + str(e) + "_.pt"))
 
         if e%50==0:
-            avg_psnr,avg_ssim=Test_for_one(modelConfig,e)
+            avg_psnr,avg_ssim=Test(modelConfig,e)
             write_data = 'epoch: {}  psnr: {:.4f} ssim: {:.4f}\n'.format(e, avg_psnr,avg_ssim)
             f = open(save_txt, 'a+')
             f.write(write_data)
             f.close()
 
 
-def Test_for_one(modelConfig: Dict,epoch):
+def Test(modelConfig: Dict,epoch):
     # load model and evaluate
     device = modelConfig['device_list'][0]
     datapath_test_low = glob.glob(r'/home/yyy/data/Dataset/LOL/eval15/low/*.png')
@@ -415,13 +415,10 @@ def Test_for_one(modelConfig: Dict,epoch):
                     res_gray = rgb_to_grayscale_channel_multiplication(res_Imgs)
                     gt_gray = rgb_to_grayscale_channel_multiplication(gt_img)
 
-                    # 计算结构相似度指数 (SSIM)
                     ssim_score = calculate_ssim(res_gray, gt_gray)
                     psnr_list.append(psnr)
                     ssim_list.append(ssim_score)
                     #print('pic', str(image_num),'light:',str(i), 'orgin: ', 'psnr:', psnr, '  ssim:', ssim)
-
-
 
                     # show result
                     # output = np.concatenate([low_img, gt_img, res_Imgs], axis=1) / 255
