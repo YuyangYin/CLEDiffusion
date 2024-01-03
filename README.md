@@ -11,6 +11,17 @@ Project Page：
 [CLE Diffusion: Controllable Light Enhancement Diffusion Model(ACM MM 2023) (yuyangyin.github.io)](https://yuyangyin.github.io/CLEDiffusion/)
 
 
+# Data
+Download LOL dataset from [LOL](https://daooshee.github.io/BMVC2018website/).
+Change your own dataset path in four places(datapath_train_low,datapath_train_high,datapath_test_low,datapath_test_high) in main.py 
+The code also supports other dataset.
+
+
+# Usage
+'''
+python main.py   #train from scratch, you can change setting in modelConfig 
+'''
+
 
 
 
