@@ -13,7 +13,9 @@ Project Page：
 
 # Data
 Download LOL dataset from [LOL](https://daooshee.github.io/BMVC2018website/).
-Change your own dataset path in four places(datapath_train_low,datapath_train_high,datapath_test_low,datapath_test_high) in main.py 
+
+Change your own dataset path in four places(datapath_train_low,datapath_train_high,datapath_test_low,datapath_test_high) in main.py .
+
 The code also supports other dataset.
 
 
