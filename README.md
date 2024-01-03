@@ -37,10 +37,6 @@ python main.py   #train from scratch, you can change setting in modelConfig
 
 
 
-Due to the recent busy schedule with CVPR's deadline, we will do our best to release the code shortly after the CVPR submission deadline. Thanks for your attention.
-
-
-
 # Citation
 
 
