@@ -18,9 +18,9 @@ The code also supports other dataset.
 
 
 # Usage
-'''
+```python
 python main.py   #train from scratch, you can change setting in modelConfig 
-'''
+```
 
 
 
