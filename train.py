@@ -23,13 +23,14 @@ from loss import Myloss
 import numpy as np
 from tensorboardX import SummaryWriter
 from skimage.metrics import peak_signal_noise_ratio as PSNR
-from skimage.metrics import structural_similarity as SSIM
+from skimage.metrics import structural_similarity as SSIM    
 import torch.utils.data as data
 import glob
 import random
 from albumentations.pytorch import ToTensorV2
 import lpips
 import time
+import argparse
 
 class load_data(data.Dataset):
     def __init__(self, input_data_low, input_data_high):
@@ -59,7 +60,8 @@ class load_data(data.Dataset):
 
         data_low=np.power(data_low,0.25)
         data_low = self.transform(image=data_low)["image"]
-        mean=torch.tensor([0.4350, 0.4445, 0.4086])
+         #mean and var of lol training dataset. If you change dataset, please change mean and var.
+        mean=torch.tensor([0.4350, 0.4445, 0.4086])  
         var=torch.tensor([0.0193, 0.0134, 0.0199])
         data_low=(data_low-mean.view(3,1,1))/var.view(3,1,1)
         data_low=data_low/20
@@ -189,90 +191,79 @@ def calculate_ssim(img1, img2):
     score, _ = SSIM(img1, img2, full=True)
     return score
 
-def train(modelConfig: Dict):
-    if modelConfig["DDP"]==True:
-        # parser = argparse.ArgumentParser()
-        # parser.add_argument("--local_rank", default=-1)
-        # FLAGS = parser.parse_args()
-        # local_rank = FLAGS.local_rank
+def train(config: Dict):
+    if config.DDP==True:
         local_rank = int(os.getenv('LOCAL_RANK', -1))
         print('locak rank:',local_rank)
-        #local_rank=int(local_rank)+3
         torch.cuda.set_device(local_rank)
         dist.init_process_group(backend='nccl')
         device = torch.device("cuda", local_rank)
-    datapath_train_low = glob.glob(r'/home/yyy/data/Dataset/LOL/our485/low/*.png')
-    datapath_train_high = glob.glob(r'/home/yyy/data/Dataset/LOL/our485/high/*.png')
-
+    
+    train_low_path=config.dataset_path+r'our485/low/*.png'    
+    train_high_path=config.dataset_path+r'our485/high/*.png'
+    datapath_train_low = glob.glob(train_low_path)
+    datapath_train_high = glob.glob(train_high_path)
     dataload_train=load_data(datapath_train_low, datapath_train_high)
-    if modelConfig["DDP"] == True:
+    if config.DDP == True:
         train_sampler = torch.utils.data.distributed.DistributedSampler(dataload_train)
-        dataloader= DataLoader(dataload_train, batch_size=modelConfig["batch_size"],sampler=train_sampler)
+        dataloader= DataLoader(dataload_train, batch_size=config.batch_size,sampler=train_sampler)
     else:
-        dataloader = DataLoader(dataload_train, batch_size=modelConfig["batch_size"], shuffle=True, num_workers=4,
+        dataloader = DataLoader(dataload_train, batch_size=config.batch_size, shuffle=True, num_workers=4,
                                 drop_last=True, pin_memory=True)
-    # model setup
-    net_model = UNet(T=modelConfig["T"], ch=modelConfig["channel"], ch_mult=modelConfig["channel_mult"], attn=modelConfig["attn"],
-                     num_res_blocks=modelConfig["num_res_blocks"], dropout=modelConfig["dropout"])
+        
+    net_model = UNet(T=config.T, ch=config.channel, ch_mult=config.channel_mult, attn=config.attn,
+                     num_res_blocks=config.num_res_blocks, dropout=config.dropout)
 
-    if modelConfig["training_load_weight"] is not None:
+    if config.pretrained_path is not None:
         ckpt = torch.load(os.path.join(
-                modelConfig["load_weight"]), map_location='cpu')
+                config.pretrained_path), map_location='cpu')
         net_model.load_state_dict({k.replace('module.', ''): v for k, v in ckpt.items()})
-        get_epoch = int(modelConfig["load_weight"].split('_')[1])+1
-        print('load model from epoch:',get_epoch)
-    else:
-        get_epoch=0
 
-    if modelConfig["DDP"] == True:
+
+    if config.DDP == True:
         net_model = DDP(net_model.cuda(), device_ids=[local_rank], output_device=local_rank,)
     else:
-        net_model=torch.nn.DataParallel(net_model,device_ids=modelConfig['device_list'])
-        device=modelConfig['device_list'][0]
+        net_model=torch.nn.DataParallel(net_model,device_ids=config.device_list)
+        device=config.device_list[0]
         net_model.to(device)
 
 
     optimizer = torch.optim.AdamW(
-        net_model.parameters(), lr=modelConfig["lr"], weight_decay=1e-4)
+        net_model.parameters(), lr=config.lr, weight_decay=1e-4)
     cosineScheduler = optim.lr_scheduler.CosineAnnealingLR(
-        optimizer=optimizer, T_max=modelConfig["epoch"], eta_min=0, last_epoch=-1)
+        optimizer=optimizer, T_max=config.epoch, eta_min=0, last_epoch=-1)
     warmUpScheduler = GradualWarmupScheduler(
-        optimizer=optimizer, multiplier=modelConfig["multiplier"], warm_epoch=modelConfig["epoch"] // 10, after_scheduler=cosineScheduler)
+        optimizer=optimizer, multiplier=config.multiplier, warm_epoch=config.epoch // 10, after_scheduler=cosineScheduler)
     trainer = GaussianDiffusionTrainer(
-        net_model, modelConfig["beta_1"], modelConfig["beta_T"], modelConfig["T"],).to(device)
+        net_model, config.beta_1, config.beta_T, config.T,).to(device)
 
 
-    log_savedir=modelConfig["ouput_save_dir"]+'logs/'
+    log_savedir=config.output_path+'/logs/'
     if not os.path.exists(log_savedir):
         os.makedirs(log_savedir)
     writer = SummaryWriter(log_dir=log_savedir)
 
-    ckpt_savedir=modelConfig["ouput_save_dir"]+modelConfig["save_weight_dir"]
+    ckpt_savedir=config.output_path+'/ckpt/'
     if not os.path.exists(ckpt_savedir):
         os.makedirs(ckpt_savedir)
 
-    save_txt= modelConfig["ouput_save_dir"] + 'res.txt'
-
+    save_txt= config.output_path + 'res.txt'
+    
     num=0
-
-    for e in range(get_epoch,modelConfig["epoch"]):
-       # print(e)
-        if modelConfig["DDP"] == True:
+    for e in range(config.epoch):
+        if config.DDP == True:
            dataloader.sampler.set_epoch(e)
 
-
         with tqdm(dataloader, dynamic_ncols=True) as tqdmDataLoader:
-
             for data_low, data_high, data_color, data_blur in tqdmDataLoader:
-
                 data_high = data_high.to(device)
                 data_low = data_low.to(device)
                 data_color=data_color.to(device)
                 data_blur=data_blur.to(device)
                 snr_map = getSnrMap(data_low, data_blur)
-                data_color=torch.cat([data_color, snr_map], dim=1)
+                data_concate=torch.cat([data_color, snr_map], dim=1)
                 optimizer.zero_grad()
-                [loss, mse_loss, col_loss,exp_loss,ssim_loss,l1round2_loss,vgg_loss] = trainer(data_high, data_low,data_color,e)
+                [loss, mse_loss, col_loss,exp_loss,ssim_loss,vgg_loss] = trainer(data_high, data_low,data_concate,e)
                 loss = loss.mean()
                 mse_loss = mse_loss.mean()
                 ssim_loss=ssim_loss.mean()
@@ -280,7 +271,7 @@ def train(modelConfig: Dict):
                 loss.backward()
 
                 torch.nn.utils.clip_grad_norm_(
-                    net_model.parameters(), modelConfig["grad_clip"])
+                    net_model.parameters(), config.grad_clip)
                 optimizer.step()
                 tqdmDataLoader.set_postfix(ordered_dict={
                     "epoch": e,
@@ -304,59 +295,53 @@ def train(modelConfig: Dict):
                                              "exp_loss":exp_num,
                                             'ssim_loss':ssim_num,
                                              "col_loss":col_num,
-                             
+                                            "vgg_loss":vgg_num,
                                               }, num)
                 num+=1
         warmUpScheduler.step()
 
+        #save ckpt and evaluate on test dataset
         if e % 50 == 0 :
-            if modelConfig["DDP"] == True:
+            if config.DDP == True:
                 if dist.get_rank() == 0:
                     torch.save(net_model.state_dict(), os.path.join(
-                        modelConfig["ouput_save_dir"],
-                        modelConfig["save_weight_dir"], 'ckpt_' + str(e) + "_.pt"))
-
-            elif modelConfig["DDP"] == False:
+                        ckpt_savedir, 'ckpt_' + str(e) + "_.pt"))
+            elif config.DDP == False:
                 torch.save(net_model.state_dict(), os.path.join(
-                    modelConfig["ouput_save_dir"],
-                modelConfig["save_weight_dir"], 'ckpt_' + str(e) + "_.pt"))
+                    ckpt_savedir, 'ckpt_' + str(e) + "_.pt"))
 
         if e%50==0:
-            avg_psnr,avg_ssim=Test(modelConfig,e)
+            avg_psnr,avg_ssim=Test(config,e)
             write_data = 'epoch: {}  psnr: {:.4f} ssim: {:.4f}\n'.format(e, avg_psnr,avg_ssim)
             f = open(save_txt, 'a+')
             f.write(write_data)
             f.close()
 
 
-def Test(modelConfig: Dict,epoch):
+def Test(config: Dict,epoch):
     # load model and evaluate
-    device = modelConfig['device_list'][0]
-    datapath_test_low = glob.glob(r'/home/yyy/data/Dataset/LOL/eval15/low/*.png')
-    datapath_test_high = glob.glob(r'/home/yyy/data/Dataset/LOL/eval15/high/*.png')
+    device = config.device_list[0]
+    test_low_path=config.dataset_path+r'eval15/low/*.png'    
+    test_high_path=config.dataset_path+r'eval15/high/*.png'
+    datapath_test_low = glob.glob( test_low_path)
+    datapath_test_high = glob.glob(test_high_path)
     dataload_test = load_data_test(datapath_test_low,datapath_test_high)
     dataloader = DataLoader(dataload_test, batch_size=1, num_workers=4,
                             drop_last=True, pin_memory=True)
 
 
-    model = UNet(T=modelConfig["T"], ch=modelConfig["channel"], ch_mult=modelConfig["channel_mult"],
-                 attn=modelConfig["attn"],
-                 num_res_blocks=modelConfig["num_res_blocks"], dropout=0.)
-    ckpt_path=modelConfig["ouput_save_dir"]+modelConfig["save_weight_dir"]+'ckpt_'+str(epoch)+'_.pt'
+    model = UNet(T=config.T, ch=config.channel, ch_mult=config.channel_mult,
+                 attn=config.attn,
+                 num_res_blocks=config.num_res_blocks, dropout=0.)
+    ckpt_path=config.output_path+'ckpt/ckpt_'+str(epoch)+'_.pt'
     ckpt = torch.load(ckpt_path,map_location='cpu')
     model.load_state_dict({k.replace('module.', ''): v for k, v in ckpt.items()})
     print("model load weight done.")
+    save_dir=config.output_path+'/result/epoch'+str(epoch)+'/'
+    if not os.path.exists(save_dir):
+        os.makedirs(save_dir)
 
-
-    sample_savedir=modelConfig["ouput_save_dir"]+'result/epoch'+str(epoch)+'ddim100/'
-    #sample_savedir+='31200_ddim100/'  #epoch
-    if not os.path.exists(sample_savedir):
-        os.makedirs(sample_savedir)
-    save_dir=sample_savedir
-
-
-
-    save_txt_name =sample_savedir + 'res.txt'
+    save_txt_name =save_dir + 'res.txt'
     f = open(save_txt_name, 'w+')
     f.close()
 
@@ -368,57 +353,54 @@ def Test(modelConfig: Dict,epoch):
 
     model.eval()
     sampler = GaussianDiffusionSampler(
-        model, modelConfig["beta_1"], modelConfig["beta_T"], modelConfig["T"]).to(device)
+        model, config.beta_1, config.beta_T, config.T).to(device)
     loss_fn_vgg=lpips.LPIPS(net='vgg')
-
 
     with torch.no_grad():
         with tqdm( dataloader, dynamic_ncols=True) as tqdmDataLoader:
                 image_num = 0
                 for data_low, data_high, data_color,data_blur,filename in tqdmDataLoader:
-                # or data_low in tqdmDataLoader:
-                #     if image_num<=10:
-                #         image_num += 1
-                #         continue
                     name=filename[0].split('/')[-1]
-                    print('name:',name)
-                    gt_images = data_high.to(device)
+                    print('image:',name)
+                    gt_image = data_high.to(device)
                     lowlight_image = data_low.to(device)
                     data_color = data_color.to(device)
                     data_blur=data_blur.to(device)
                     snr_map = getSnrMap(lowlight_image, data_blur)
-                    data_color=torch.cat([data_color, snr_map], dim=1)
+                    data_concate=torch.cat([data_color, snr_map], dim=1)
 
                     #for i in range(-10, 10,1): 
                         # light_high = torch.ones([1]) * i*0.1
                         # light_high = light_high.to(device)
+                        
+                    brightness_level=gt_image.mean([1, 2, 3]) # b*1
                     time_start = time.time()
-                    sampledImgs = sampler(lowlight_image, data_color,gt_images,ddim=True,
-                                          unconditional_guidance_scale=1,ddim_step=100)
+                    sampledImgs = sampler(lowlight_image, data_concate,brightness_level,ddim=True,
+                                          unconditional_guidance_scale=1,ddim_step=config.ddim_step)
                     time_end=time.time()
-                    #print('time cost:', time_end - time_start)
+                    print('time cost:', time_end - time_start)
 
                     sampledImgs=(sampledImgs+1)/2
-                    gt_images=(gt_images+1)/2
+                    gt_image=(gt_image+1)/2
                     lowlight_image=(lowlight_image+1)/2
                     res_Imgs=np.clip(sampledImgs.detach().cpu().numpy()[0].transpose(1, 2, 0),0,1)[:,:,::-1] 
-                    gt_img=np.clip(gt_images.detach().cpu().numpy()[0].transpose(1, 2, 0),0,1)[:,:,::-1]
+                    gt_img=np.clip(gt_image.detach().cpu().numpy()[0].transpose(1, 2, 0),0,1)[:,:,::-1]
                     low_img=np.clip(lowlight_image.detach().cpu().numpy()[0].transpose(1, 2, 0),0,1)[:,:,::-1]
-
 
                     # compute psnr
                     psnr = PSNR(res_Imgs, gt_img)
+                    #ssim = SSIM(res_Imgs, gt_img, channel_axis=2,data_range=255)
+                    res_gray = rgb2gray(res_Imgs)
+                    gt_gray = rgb2gray(gt_img)
+
+                    ssim_score = SSIM(res_gray, gt_gray, multichannel=True,data_range=1)
                     res_Imgs = (res_Imgs * 255)
                     gt_img = (gt_img * 255)
                     low_img = (low_img * 255)
-                    #ssim = SSIM(res_Imgs, gt_img, channel_axis=2,data_range=255)
-                    res_gray = rgb_to_grayscale_channel_multiplication(res_Imgs)
-                    gt_gray = rgb_to_grayscale_channel_multiplication(gt_img)
-
-                    ssim_score = calculate_ssim(res_gray, gt_gray)
+                    
                     psnr_list.append(psnr)
                     ssim_list.append(ssim_score)
-                    #print('pic', str(image_num),'light:',str(i), 'orgin: ', 'psnr:', psnr, '  ssim:', ssim)
+                    print('psnr:', psnr, '  ssim:', ssim_score)
 
                     # show result
                     # output = np.concatenate([low_img, gt_img, res_Imgs], axis=1) / 255
@@ -426,13 +408,12 @@ def Test(modelConfig: Dict,epoch):
                     # plt.axis('off')
                     # plt.imshow(output)
                     # plt.show()
-
                     # save_path = save_dir + name
                     # cv2.imwrite(save_path, output * 255)
-                    save_path =save_dir+ str(image_num)+'.png'
+                    save_path =save_dir+ name+'.png'
                     cv2.imwrite(save_path, res_Imgs)
-                    image_num+=1
-            # show avg result
+
+  
                 avg_psnr = sum(psnr_list) / len(psnr_list)
                 avg_ssim = sum(ssim_list) / len(ssim_list)
                 print('psnr_orgin_avg:', avg_psnr)
@@ -451,11 +432,10 @@ def Test(modelConfig: Dict,epoch):
                 f.close()
                 return avg_psnr,avg_ssim
 
-
-#old vision
 if __name__== "__main__" :
+    parser = argparse.ArgumentParser()
     modelConfig = {
-        ##1 resize   2 randomcrop
+  
         "DDP": False,
         "state": "train", # or eval
         "epoch": 60001,
@@ -472,19 +452,25 @@ if __name__== "__main__" :
         "beta_T": 0.02,
         "img_size": 32,
         "grad_clip": 1.,
-        "device": "cuda:1",
+        "device": "cuda:0",
         "device_list": [1],
         #"device_list": [3,2,1,0],
-        "training_load_weight": True,
-
-        "ouput_save_dir": "./output/",
-        "save_weight_dir":"Checkpoint/",
-        "load_weight": "/data/users/yyy/CnnDiffusion4.15/CnnDiffusion4.15/output/Checkpoint/ckpt_1850_.pt",   #5000*8+2600*16
-
+        
         "ddim":True,
         "unconditional_guidance_scale":1,
         "ddim_step":100
-        }
+    }
 
-    train(modelConfig)
+
+    parser.add_argument('--dataset_path', type=str, default="./data/LOL/")
+    parser.add_argument('--state', type=str, default="train")  #or eval
+    parser.add_argument('--pretrained_path', type=str, default=None)  #or eval
+    parser.add_argument('--output_path', type=str, default="./output/")  #or eval
+
+    config = parser.parse_args()
+    
+    for key, value in modelConfig.items():
+        setattr(config, key, value)
+    print(config)
+    train(config)
     #Test_for_one(modelConfig,epoch=14000)

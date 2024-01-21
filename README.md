@@ -1,8 +1,12 @@
 # **CLE Diffusion: Controllable Light Enhancement Diffusion Model**
+Authors: Yuyang Yin, Dejia Xu, Chuangchuang Tan, Ping Liu, Yao Zhao, Yunchao Wei
+
+Institution: Beijing Jiaotong University, UT Austin, A*Star
 
 # Paper Link:
 
 [[2308.06725\] CLE Diffusion: Controllable Light Enhancement Diffusion Model (arxiv.org)](https://arxiv.org/abs/2308.06725)
+
 
 
 
@@ -12,16 +16,30 @@ Project Page：
 
 
 # Data
-Download LOL dataset from [LOL](https://daooshee.github.io/BMVC2018website/).
-
-Change your own dataset path in four places(datapath_train_low,datapath_train_high,datapath_test_low,datapath_test_high) in main.py .
+Download LOL dataset from [LOL](https://daooshee.github.io/BMVC2018website/). Put the dataset under '/data/LOL' file.
 
 The code also supports other dataset.
 
+# Checkpoint
+[Pretrianed model](https://drive.google.com/file/d/1uf8Sj1LUduWs6TALM77wxapMAmoGIaEY/view?usp=sharing) on LOL dataset 
 
 # Usage
+Our code structure is based on the original implementation of DDPM. We test the code on one RTX3090. Increasing the size of the U-Net may lead to better results.
 ```python
-python main.py   #train from scratch, you can change setting in modelConfig 
+python train.py   #train from scratch, you can change setting in modelConfig 
+python train.py --pretrained_path ckpt/lol.pt  
+python test.py --pretrained_path ckpt/lol.pt  
+```
+
+# Mask CLE Diffusion
+Mask CLE Diffusion finetunes lol checkpoint. In our experiments, lol checkpoint is better than mit-adobe-5K checkpoint.
+
+We show some inference cases in 'data/Mask_CLE_cases'. Welcome to use your cases to test the performance.
+
+```python
+python mask_generation.py   #generate masks for training
+python train_mask.py --pretrained_path ckpt/lol.pt  #finetune Mask CLE Diffusion
+python test_mask.py --pretrained_path ckpt/mask_cle.pt --input_path data/Mask_CLE_cases/opera.png --mask_path data/Mask_CLE_cases/opera_mask.png
 ```
 
 
@@ -31,11 +49,18 @@ python main.py   #train from scratch, you can change setting in modelConfig
 
 - [x] LOL dataset outputs
 
-- [x] release train and test code
+- [x] release training and testing code
 
-- [ ] release Mask CLE Diffusion code
+- [x] release Mask CLE Diffusion code
+
+- [ ] release mit-5k training code and checkpoints
+
+- [ ] update lpips and LI-lpips metrics
 
 
+
+# Acknowledgement
+This work is mainly built on [DenoisingDiffusionProbabilityModel-ddpm](https://github.com/zoubohao/DenoisingDiffusionProbabilityModel-ddpm-). Thanks a lot to authors for sharing!
 
 # Citation
 
@@ -51,3 +76,4 @@ python main.py   #train from scratch, you can change setting in modelConfig
 }
 ```
 
+If you have any problems, please feel free to create a new issue or email me(yuyangyin@bjtu.edu.cn)..
