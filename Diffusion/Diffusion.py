@@ -11,7 +11,6 @@ import torch.nn.functional as F
 from loss import Myloss
 from kornia.losses import ssim_loss
 import numpy as np
-from focal_frequency_loss import FocalFrequencyLoss as FFL
 import lpips
 
 

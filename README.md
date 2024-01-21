@@ -23,6 +23,11 @@ The code also supports other dataset.
 # Checkpoint
 [Pretrianed model](https://drive.google.com/file/d/1uf8Sj1LUduWs6TALM77wxapMAmoGIaEY/view?usp=sharing) on LOL dataset 
 
+# Setup
+```python
+pip install -r requirements.txt
+```
+
 # Usage
 Our code structure is based on the original implementation of DDPM. We test the code on one RTX3090. Increasing the size of the U-Net may lead to better results.
 ```python
