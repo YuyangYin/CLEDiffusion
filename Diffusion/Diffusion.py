@@ -112,8 +112,6 @@ class GaussianDiffusionTrainer(nn.Module):
         vgg_loss = self.loss_fn_vgg(gt_images, y_0_pred)*vgg_loss_wight
         loss+=vgg_loss
 
-
-
         return [loss, mse_loss, col_loss, exposure_loss,ssimLoss,vgg_loss]
 
     # def forward(self, gt_images,lowlight_image,snr_map):

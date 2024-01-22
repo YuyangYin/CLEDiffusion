@@ -29,7 +29,11 @@ pip install -r requirements.txt
 ```
 
 # Usage
-Our code structure is based on the original implementation of DDPM. We test the code on one RTX3090. Increasing the size of the U-Net may lead to better results.
+Our diffusion code structure is based on the original implementation of DDPM. We test the code on one RTX3090. Increasing the size of the U-Net may lead to better results.
+
+About training iteration. The training with 5000 iterations has converged quite well. We recommend training for 10,000 iterations to achieve better performance, and you can select the best-performing training iterations.
+
+We test code on one RTX 3090 GPU. The training time is about 1-2 days.
 ```python
 python train.py   #train from scratch, you can change setting in modelConfig 
 python train.py --pretrained_path ckpt/lol.pt  
