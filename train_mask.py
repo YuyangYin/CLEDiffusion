@@ -343,7 +343,7 @@ if __name__== "__main__" :
         "img_size": 32,
         "grad_clip": 1.,
         "device": "cuda:0",
-        "device_list": [3],
+        "device_list": [0],
         #"device_list": [3,2,1,0],
         
         "ddim":True,

@@ -29,7 +29,7 @@ pip install -r requirements.txt
 ```
 
 # Usage
-Our diffusion code structure is based on the original implementation of DDPM. We test the code on one RTX3090. Increasing the size of the U-Net may lead to better results.
+Our diffusion code structure is based on the original implementation of DDPM. Increasing the size of the U-Net may lead to better results.
 
 About training iteration. The training with 5000 iterations has converged quite well. We recommend training for 10,000 iterations to achieve better performance, and you can select the best-performing training iterations.
 
