@@ -21,7 +21,9 @@ Download LOL dataset from [LOL](https://daooshee.github.io/BMVC2018website/). Pu
 The code also supports other dataset.
 
 # Checkpoint
-[Pretrianed model](https://drive.google.com/file/d/1uf8Sj1LUduWs6TALM77wxapMAmoGIaEY/view?usp=sharing) on LOL dataset 
+Download [Pretrianed model](https://drive.google.com/file/d/1uf8Sj1LUduWs6TALM77wxapMAmoGIaEY/view?usp=sharing) on LOL dataset and put it under 'ckpt' file.
+
+Download [Mask CLE Diffusion Pretrianed model](https://drive.google.com/file/d/1VZT3iWgBy_TXA3ASUf_M9_JdfYD4PGlI/view?usp=sharing) and put it under 'ckpt' file. 
 
 # Setup
 ```python
