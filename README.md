@@ -1,7 +1,7 @@
 # **(MM2023)CLE Diffusion: Controllable Light Enhancement Diffusion Model**
 Authors: Yuyang Yin, Dejia Xu, Chuangchuang Tan, Ping Liu, Yao Zhao, Yunchao Wei
 
-Institution: Beijing Jiaotong University, UT Austin, A*Star
+Institutions: Beijing Jiaotong University, UT Austin, A*Star
 
 # Paper Link:
 
