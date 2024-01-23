@@ -318,7 +318,15 @@ def train(config: Dict):
                                               }, num)
                 num+=1
         warmUpScheduler.step()
-
+        
+        if e % 50 == 0 :
+            if config.DDP == True:
+                if dist.get_rank() == 0:
+                    torch.save(net_model.state_dict(), os.path.join(
+                        ckpt_savedir, 'ckpt_' + str(e) + "_.pt"))
+            elif config.DDP == False:
+                torch.save(net_model.state_dict(), os.path.join(
+                    ckpt_savedir, 'ckpt_' + str(e) + "_.pt"))
 
 
 
@@ -343,7 +351,7 @@ if __name__== "__main__" :
         "img_size": 32,
         "grad_clip": 1.,
         "device": "cuda:0",
-        "device_list": [0],
+        "device_list": [3],
         #"device_list": [3,2,1,0],
         
         "ddim":True,
