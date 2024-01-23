@@ -39,10 +39,11 @@ class load_data_test(data.Dataset):
         self.transform=A.Compose(
             [
               #  A.RandomCrop(height=400, width=400),
-                # A.Resize(600, 400),
+                A.Resize(400, 600),
                 ToTensorV2(),
             ]
         )
+        self.mask_path=mask_path[0]
 
 
 
@@ -50,10 +51,11 @@ class load_data_test(data.Dataset):
         return len(self.input_data_low)
 
     def __getitem__(self, idx):
+        print('mask_path:',self.mask_path)
+        mask=cv2.imread(self.mask_path)/255.
+        mask=self.transform(image=mask)["image"]
+        # mask=mask.permute(2, 0, 1)
 
-        mask=cv2.imread(mask)/255.
-        mask=torch.from_numpy(mask)
-        mask=mask.permute(2, 0, 1)
 
         data_low = cv2.imread(self.input_data_low[idx])
         data_low=data_low[:,:,::-1].copy()
@@ -168,19 +170,22 @@ def Test(config: Dict):
                     data_blur=data_blur.to(device)
                     snr_map = getSnrMap(lowlight_image, data_blur)
                     
-                    mask = mask.to(device)
-                    mask=cv2.resize(mask,(data_low.shape[2],data_low.shape[3]))
+                    mask = mask.numpy()
+                    # print('type:',type(mask))
+                    print('data low shape:',data_low.shape)
+                    print('mask shape:',mask.shape)
+                    # mask=cv2.resize(mask,(data_low.shape[2],data_low.shape[3]))
                     mask=cv2.GaussianBlur(mask, (25, 25), 0)
-                    mask=torch.from_numpy(mask)
-                    mask = torch.unsqueeze(mask, 0).to(device)
+                    mask=torch.from_numpy(mask).to(device)
+                    # mask = torch.unsqueeze(mask, 0).to(device)
                     # mask = np.ones([400, 600,1]) * 0
                     # mask=torch.unsqueeze(mask,0).to(device)
                     # mask[:, :, 100:400, 100:400] = 1
                     
                     data_concate=torch.cat([data_color, snr_map,mask], dim=1)
 
-                    for i in range(-8, 10,1): 
-                        brightness_level = torch.ones([1]) * i*0.1
+                    for i in range(-8, 8): 
+                        brightness_level = torch.ones([1]) * i
                         brightness_level = brightness_level.to(device)
                         
                         time_start = time.time()
@@ -191,10 +196,11 @@ def Test(config: Dict):
 
                         sampledImgs=(sampledImgs+1)/2
                         res_Imgs=np.clip(sampledImgs.detach().cpu().numpy()[0].transpose(1, 2, 0),0,1)[:,:,::-1] 
-                        low_img = (low_img * 255)
+
                     
-                        save_path =save_dir+ config.name+'_level'+str(i)+'.png'
-                        cv2.imwrite(save_path, res_Imgs)
+                        save_path =save_dir+ config.data_name+'_level'+str(i)+'.png'
+                        print(save_path)
+                        cv2.imwrite(save_path, res_Imgs*255)
     
 
 

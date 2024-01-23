@@ -336,7 +336,7 @@ if __name__== "__main__" :
 
         "DDP": False,
         "state": "train", # or eval
-        "epoch": 5000,
+        "epoch": 2000,
         "batch_size":16 ,
         "T": 1000,
         "channel": 128,

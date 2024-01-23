@@ -48,7 +48,7 @@ We show some inference cases in 'data/Mask_CLE_cases'. Welcome to use your cases
 ```python
 python mask_generation.py   #generate masks for training
 python train_mask.py --pretrained_path ckpt/lol.pt  #finetune Mask CLE Diffusion
-python test_mask.py --pretrained_path ckpt/mask_cle.pt --input_path data/Mask_CLE_cases/opera.png --mask_path data/Mask_CLE_cases/opera_mask.png
+python test_mask.py --pretrained_path ckpt/Mask_CLE.pt --input_path data/Mask_CLE_cases/opera.png --mask_path data/Mask_CLE_cases/opera_mask.png --data_name opera
 ```
 
 
