@@ -1,0 +1,18 @@
+Namespace(dataset_path='./data/LOL/', state='train', pretrained_path='ckpt/lol.pt', output_path='./output/', DDP=False, epoch=10001, batch_size=16, T=1000, channel=128, channel_mult=[1, 2, 3, 4], attn=[2], num_res_blocks=2, dropout=0.15, lr=5e-05, multiplier=2.0, beta_1=0.0001, beta_T=0.02, img_size=32, grad_clip=1.0, device='cuda', device_list=[0], ddim=True, unconditional_guidance_scale=1, ddim_step=100)
+Total training examples: 485
+Traceback (most recent call last):
+  File "/home/pdi/Documentos/CLEDiffusion-final/CLEDiffusion-final/CLEDiffusion-main/train.py", line 502, in <module>
+    train(config)
+  File "/home/pdi/Documentos/CLEDiffusion-final/CLEDiffusion-final/CLEDiffusion-main/train.py", line 220, in train
+    ckpt = torch.load(os.path.join(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pdi/anaconda3/envs/CLEDiff/lib/python3.11/site-packages/torch/serialization.py", line 998, in load
+    with _open_file_like(f, 'rb') as opened_file:
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pdi/anaconda3/envs/CLEDiff/lib/python3.11/site-packages/torch/serialization.py", line 445, in _open_file_like
+    return _open_file(name_or_buffer, mode)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pdi/anaconda3/envs/CLEDiff/lib/python3.11/site-packages/torch/serialization.py", line 426, in __init__
+    super().__init__(open(name, mode))
+                     ^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'ckpt/lol.pt'

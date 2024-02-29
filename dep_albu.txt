@@ -1,0 +1,18 @@
+ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+tables 3.8.0 requires blosc2~=2.0.0, which is not installed.
+tables 3.8.0 requires cython>=0.29.21, which is not installed.
+gensim 4.3.0 requires FuzzyTM>=0.4.0, which is not installed.
+numba 0.57.1 requires numpy<1.25,>=1.21, but you have numpy 1.26.4 which is incompatible.
+
+numpy == 1.24
+blosc2~=2.0.0
+cython>=0.29.21
+FuzzyTM>=0.4.0
+pillow
+albumentations
+
+
+
+conda install pytorch torchvision pytorch-cuda=12.1 -c pytorch -c nvidia numpy=1.24 blosc2=2.0.0 cython=0.29.21 FuzzyTM=0.4.0
+
+

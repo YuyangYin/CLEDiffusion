@@ -31,6 +31,8 @@ from albumentations.pytorch import ToTensorV2
 import lpips
 import time
 import argparse
+import wandb
+import random
 
 class load_data(data.Dataset):
     def __init__(self, input_data_low, input_data_high):
@@ -199,8 +201,8 @@ def train(config: Dict):
         dist.init_process_group(backend='nccl')
         device = torch.device("cuda", local_rank)
     
-    train_low_path=config.dataset_path+r'our485/low/*.png'    
-    train_high_path=config.dataset_path+r'our485/high/*.png'
+    train_low_path=config.dataset_path+r'our485/low/*.png'    #mudar endereços
+    train_high_path=config.dataset_path+r'our485/low/*.png'    #mudar endereços
     datapath_train_low = glob.glob(train_low_path)
     datapath_train_high = glob.glob(train_high_path)
     dataload_train=load_data(datapath_train_low, datapath_train_high)
@@ -241,7 +243,7 @@ def train(config: Dict):
     log_savedir=config.output_path+'/logs/'
     if not os.path.exists(log_savedir):
         os.makedirs(log_savedir)
-    writer = SummaryWriter(log_dir=log_savedir)
+    writer = SummaryWriter(log_dir=log_savedir)#sumario de escrita 
 
     ckpt_savedir=config.output_path+'/ckpt/'
     if not os.path.exists(ckpt_savedir):
@@ -269,6 +271,18 @@ def train(config: Dict):
                 ssim_loss=ssim_loss.mean()
                 vgg_loss = vgg_loss.mean()
                 loss.backward()
+                #Adicionar uma flag do wandb para acompanhar a epoch e a loss 
+                wandb.log({
+                    "epoch": e,
+                    "loss: ": loss.item(),
+                    "mse_loss":mse_loss.item(),
+                    "exp_loss":exp_loss.item(),
+                    "col_loss":col_loss.item(),
+                    'ssim_loss':ssim_loss.item(),
+                    'vgg_loss':vgg_loss.item(),
+                    "LR": optimizer.state_dict()['param_groups'][0]["lr"],
+                    "num":num+1
+                })
 
                 torch.nn.utils.clip_grad_norm_(
                     net_model.parameters(), config.grad_clip)
@@ -298,6 +312,8 @@ def train(config: Dict):
                                             "vgg_loss":vgg_num,
                                               }, num)
                 num+=1
+                #Adicionar uma flag do wandb para acompanhar a loss// adaptar o summary writer do tensor board
+
         warmUpScheduler.step()
 
         #save ckpt and evaluate on test dataset
@@ -322,7 +338,8 @@ def Test(config: Dict,epoch):
     # load model and evaluate
     device = config.device_list[0]
     test_low_path=config.dataset_path+r'eval15/low/*.png'    
-    test_high_path=config.dataset_path+r'eval15/high/*.png'
+    test_high_path=config.dataset_path+r'eval15/high/*.png' 
+
     datapath_test_low = glob.glob( test_low_path)
     datapath_test_high = glob.glob(test_high_path)
     dataload_test = load_data_test(datapath_test_low,datapath_test_high)
@@ -400,6 +417,7 @@ def Test(config: Dict,epoch):
                     
                     psnr_list.append(psnr)
                     ssim_list.append(ssim_score)
+                    # Colocar flag no wandb para as variaveis psnr ssim
                     print('psnr:', psnr, '  ssim:', ssim_score)
 
                     # show result
@@ -416,6 +434,9 @@ def Test(config: Dict,epoch):
   
                 avg_psnr = sum(psnr_list) / len(psnr_list)
                 avg_ssim = sum(ssim_list) / len(ssim_list)
+
+                # Colocar flag no wandb para as variaveis avg_psnr avg_ssim
+
                 print('psnr_orgin_avg:', avg_psnr)
                 print('ssim_orgin_avg:', avg_ssim)
 
@@ -430,6 +451,7 @@ def Test(config: Dict,epoch):
                 f.write('\nssim_orgin_avg:')
                 f.write(str(avg_ssim))
                 f.close()
+
                 return avg_psnr,avg_ssim
 
 if __name__== "__main__" :
@@ -452,8 +474,8 @@ if __name__== "__main__" :
         "beta_T": 0.02,
         "img_size": 32,
         "grad_clip": 1.,
-        "device": "cuda:0",
-        "device_list": [1],
+        "device": "cuda", #MODIFIQUEI
+        "device_list": [0],
         #"device_list": [3,2,1,0],
         
         "ddim":True,
@@ -469,8 +491,14 @@ if __name__== "__main__" :
 
     config = parser.parse_args()
     
+    wandb.init(
+            project="CLEDiffusion",
+            config=vars(config)
+        )
+    
     for key, value in modelConfig.items():
         setattr(config, key, value)
     print(config)
     train(config)
+    wandb.finish()
     #Test_for_one(modelConfig,epoch=14000)

@@ -1,0 +1,26 @@
+Namespace(dataset_path='./data/LOL/', state='train', pretrained_path=None, output_path='./output/', DDP=False, epoch=10001, batch_size=16, T=1000, channel=128, channel_mult=[1, 2, 3, 4], attn=[2], num_res_blocks=2, dropout=0.15, lr=5e-05, multiplier=2.0, beta_1=0.0001, beta_T=0.02, img_size=32, grad_clip=1.0, device='cuda:1', device_list=[1], ddim=True, unconditional_guidance_scale=1, ddim_step=100)
+Total training examples: 485
+Traceback (most recent call last):
+  File "/home/pdi/Documentos/CLEDiffusion-final/CLEDiffusion-final/CLEDiffusion-main/train.py", line 502, in <module>
+    train(config)
+  File "/home/pdi/Documentos/CLEDiffusion-final/CLEDiffusion-final/CLEDiffusion-main/train.py", line 230, in train
+    net_model.to(device)
+  File "/home/pdi/anaconda3/envs/CLEDiff/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1152, in to
+    return self._apply(convert)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/pdi/anaconda3/envs/CLEDiff/lib/python3.11/site-packages/torch/nn/modules/module.py", line 802, in _apply
+    module._apply(fn)
+  File "/home/pdi/anaconda3/envs/CLEDiff/lib/python3.11/site-packages/torch/nn/modules/module.py", line 802, in _apply
+    module._apply(fn)
+  File "/home/pdi/anaconda3/envs/CLEDiff/lib/python3.11/site-packages/torch/nn/modules/module.py", line 802, in _apply
+    module._apply(fn)
+  [Previous line repeated 1 more time]
+  File "/home/pdi/anaconda3/envs/CLEDiff/lib/python3.11/site-packages/torch/nn/modules/module.py", line 825, in _apply
+    param_applied = fn(param)
+                    ^^^^^^^^^
+  File "/home/pdi/anaconda3/envs/CLEDiff/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1150, in convert
+    return t.to(device, dtype if t.is_floating_point() or t.is_complex() else None, non_blocking)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pdi/anaconda3/envs/CLEDiff/lib/python3.11/site-packages/torch/cuda/__init__.py", line 293, in _lazy_init
+    raise AssertionError("Torch not compiled with CUDA enabled")
+AssertionError: Torch not compiled with CUDA enabled

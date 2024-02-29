@@ -1,0 +1,193 @@
+2024-02-28 16:37:40,828 INFO    StreamThr :126881 [internal.py:wandb_internal():86] W&B internal server running at pid: 126881, started at: 2024-02-28 16:37:40.828050
+2024-02-28 16:37:40,829 DEBUG   HandlerThread:126881 [handler.py:handle_request():146] handle_request: status
+2024-02-28 16:37:40,830 INFO    WriterThread:126881 [datastore.py:open_for_write():87] open: /home/pdi/Documentos/CLEDiffusion-final/CLEDiffusion-final/CLEDiffusion-main/wandb/run-20240228_163740-opyuuamu/run-opyuuamu.wandb
+2024-02-28 16:37:40,833 DEBUG   SenderThread:126881 [sender.py:send():382] send: header
+2024-02-28 16:37:40,833 DEBUG   SenderThread:126881 [sender.py:send():382] send: run
+2024-02-28 16:37:41,365 INFO    SenderThread:126881 [dir_watcher.py:__init__():211] watching files in: /home/pdi/Documentos/CLEDiffusion-final/CLEDiffusion-final/CLEDiffusion-main/wandb/run-20240228_163740-opyuuamu/files
+2024-02-28 16:37:41,365 INFO    SenderThread:126881 [sender.py:_start_run_threads():1136] run started: opyuuamu with start time 1709149060.827855
+2024-02-28 16:37:41,369 DEBUG   HandlerThread:126881 [handler.py:handle_request():146] handle_request: check_version
+2024-02-28 16:37:41,369 DEBUG   SenderThread:126881 [sender.py:send_request():409] send_request: check_version
+2024-02-28 16:37:41,520 DEBUG   HandlerThread:126881 [handler.py:handle_request():146] handle_request: run_start
+2024-02-28 16:37:41,525 DEBUG   HandlerThread:126881 [system_info.py:__init__():27] System info init
+2024-02-28 16:37:41,526 DEBUG   HandlerThread:126881 [system_info.py:__init__():42] System info init done
+2024-02-28 16:37:41,526 INFO    HandlerThread:126881 [system_monitor.py:start():194] Starting system monitor
+2024-02-28 16:37:41,526 INFO    SystemMonitor:126881 [system_monitor.py:_start():158] Starting system asset monitoring threads
+2024-02-28 16:37:41,526 INFO    HandlerThread:126881 [system_monitor.py:probe():214] Collecting system info
+2024-02-28 16:37:41,527 INFO    SystemMonitor:126881 [interfaces.py:start():190] Started cpu monitoring
+2024-02-28 16:37:41,528 INFO    SystemMonitor:126881 [interfaces.py:start():190] Started disk monitoring
+2024-02-28 16:37:41,528 INFO    SystemMonitor:126881 [interfaces.py:start():190] Started gpu monitoring
+2024-02-28 16:37:41,529 INFO    SystemMonitor:126881 [interfaces.py:start():190] Started memory monitoring
+2024-02-28 16:37:41,529 INFO    SystemMonitor:126881 [interfaces.py:start():190] Started network monitoring
+2024-02-28 16:37:41,552 DEBUG   HandlerThread:126881 [system_info.py:probe():151] Probing system
+2024-02-28 16:37:41,553 DEBUG   HandlerThread:126881 [gitlib.py:_init_repo():56] git repository is invalid
+2024-02-28 16:37:41,553 DEBUG   HandlerThread:126881 [system_info.py:probe():199] Probing system done
+2024-02-28 16:37:41,553 DEBUG   HandlerThread:126881 [system_monitor.py:probe():223] {'os': 'Linux-5.15.0-97-generic-x86_64-with-glibc2.31', 'python': '3.11.0', 'heartbeatAt': '2024-02-28T19:37:41.552150', 'startedAt': '2024-02-28T19:37:40.819518', 'docker': None, 'cuda': None, 'args': (), 'state': 'running', 'program': '/home/pdi/Documentos/CLEDiffusion-final/CLEDiffusion-final/CLEDiffusion-main/train.py', 'codePathLocal': 'train.py', 'codePath': 'train.py', 'host': 'pdi-desktop', 'username': 'pdi', 'executable': '/home/pdi/anaconda3/envs/CLEDiff/bin/python', 'cpu_count': 4, 'cpu_count_logical': 8, 'cpu_freq': {'current': 2.0420000000000003, 'min': 1600.0, 'max': 3900.0}, 'cpu_freq_per_core': [{'current': 1.7, 'min': 1600.0, 'max': 3900.0}, {'current': 1.6, 'min': 1600.0, 'max': 3900.0}, {'current': 1.6, 'min': 1600.0, 'max': 3900.0}, {'current': 1.6, 'min': 1600.0, 'max': 3900.0}, {'current': 3.829, 'min': 1600.0, 'max': 3900.0}, {'current': 1.7, 'min': 1600.0, 'max': 3900.0}, {'current': 2.707, 'min': 1600.0, 'max': 3900.0}, {'current': 1.6, 'min': 1600.0, 'max': 3900.0}], 'disk': {'/': {'total': 878.6833457946777, 'used': 207.11960220336914}}, 'gpu': 'NVIDIA TITAN X (Pascal)', 'gpu_count': 1, 'gpu_devices': [{'name': 'NVIDIA TITAN X (Pascal)', 'memory_total': 12884901888}], 'memory': {'total': 15.563858032226562}}
+2024-02-28 16:37:41,553 INFO    HandlerThread:126881 [system_monitor.py:probe():224] Finished collecting system info
+2024-02-28 16:37:41,553 INFO    HandlerThread:126881 [system_monitor.py:probe():227] Publishing system info
+2024-02-28 16:37:41,553 DEBUG   HandlerThread:126881 [system_info.py:_save_conda():208] Saving list of conda packages installed into the current environment
+2024-02-28 16:37:42,367 INFO    Thread-12 :126881 [dir_watcher.py:_on_file_created():271] file/dir created: /home/pdi/Documentos/CLEDiffusion-final/CLEDiffusion-final/CLEDiffusion-main/wandb/run-20240228_163740-opyuuamu/files/conda-environment.yaml
+2024-02-28 16:37:46,277 DEBUG   HandlerThread:126881 [system_info.py:_save_conda():220] Saving conda packages done
+2024-02-28 16:37:46,278 INFO    HandlerThread:126881 [system_monitor.py:probe():229] Finished publishing system info
+2024-02-28 16:37:46,281 DEBUG   SenderThread:126881 [sender.py:send():382] send: files
+2024-02-28 16:37:46,281 INFO    SenderThread:126881 [sender.py:_save_file():1403] saving file wandb-metadata.json with policy now
+2024-02-28 16:37:46,282 DEBUG   HandlerThread:126881 [handler.py:handle_request():146] handle_request: status_report
+2024-02-28 16:37:46,286 DEBUG   HandlerThread:126881 [handler.py:handle_request():146] handle_request: python_packages
+2024-02-28 16:37:46,286 DEBUG   SenderThread:126881 [sender.py:send_request():409] send_request: python_packages
+2024-02-28 16:37:46,288 DEBUG   HandlerThread:126881 [handler.py:handle_request():146] handle_request: stop_status
+2024-02-28 16:37:46,288 DEBUG   SenderThread:126881 [sender.py:send_request():409] send_request: stop_status
+2024-02-28 16:37:46,329 DEBUG   HandlerThread:126881 [handler.py:handle_request():146] handle_request: internal_messages
+2024-02-28 16:37:46,366 INFO    Thread-12 :126881 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/pdi/Documentos/CLEDiffusion-final/CLEDiffusion-final/CLEDiffusion-main/wandb/run-20240228_163740-opyuuamu/files/conda-environment.yaml
+2024-02-28 16:37:46,366 INFO    Thread-12 :126881 [dir_watcher.py:_on_file_created():271] file/dir created: /home/pdi/Documentos/CLEDiffusion-final/CLEDiffusion-final/CLEDiffusion-main/wandb/run-20240228_163740-opyuuamu/files/wandb-metadata.json
+2024-02-28 16:37:46,367 INFO    Thread-12 :126881 [dir_watcher.py:_on_file_created():271] file/dir created: /home/pdi/Documentos/CLEDiffusion-final/CLEDiffusion-final/CLEDiffusion-main/wandb/run-20240228_163740-opyuuamu/files/requirements.txt
+2024-02-28 16:37:46,668 DEBUG   SenderThread:126881 [sender.py:send():382] send: telemetry
+2024-02-28 16:37:47,023 INFO    wandb-upload_0:126881 [upload_job.py:push():131] Uploaded file /tmp/tmpvj85veo7wandb/1euiurh5-wandb-metadata.json
+2024-02-28 16:37:47,367 INFO    Thread-12 :126881 [dir_watcher.py:_on_file_created():271] file/dir created: /home/pdi/Documentos/CLEDiffusion-final/CLEDiffusion-final/CLEDiffusion-main/wandb/run-20240228_163740-opyuuamu/files/output.log
+2024-02-28 16:37:49,367 INFO    Thread-12 :126881 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/pdi/Documentos/CLEDiffusion-final/CLEDiffusion-final/CLEDiffusion-main/wandb/run-20240228_163740-opyuuamu/files/output.log
+2024-02-28 16:37:51,368 INFO    Thread-12 :126881 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/pdi/Documentos/CLEDiffusion-final/CLEDiffusion-final/CLEDiffusion-main/wandb/run-20240228_163740-opyuuamu/files/output.log
+2024-02-28 16:37:51,821 DEBUG   HandlerThread:126881 [handler.py:handle_request():146] handle_request: status_report
+2024-02-28 16:37:52,368 INFO    Thread-12 :126881 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/pdi/Documentos/CLEDiffusion-final/CLEDiffusion-final/CLEDiffusion-main/wandb/run-20240228_163740-opyuuamu/files/output.log
+2024-02-28 16:37:54,369 INFO    Thread-12 :126881 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/pdi/Documentos/CLEDiffusion-final/CLEDiffusion-final/CLEDiffusion-main/wandb/run-20240228_163740-opyuuamu/files/output.log
+2024-02-28 16:37:55,369 INFO    Thread-12 :126881 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/pdi/Documentos/CLEDiffusion-final/CLEDiffusion-final/CLEDiffusion-main/wandb/run-20240228_163740-opyuuamu/files/output.log
+2024-02-28 16:37:57,281 DEBUG   HandlerThread:126881 [handler.py:handle_request():146] handle_request: status_report
+2024-02-28 16:37:57,847 DEBUG   SenderThread:126881 [sender.py:send():382] send: exit
+2024-02-28 16:37:57,847 INFO    SenderThread:126881 [sender.py:send_exit():589] handling exit code: 1
+2024-02-28 16:37:57,847 INFO    SenderThread:126881 [sender.py:send_exit():591] handling runtime: 16
+2024-02-28 16:37:57,847 INFO    SenderThread:126881 [sender.py:_save_file():1403] saving file wandb-summary.json with policy end
+2024-02-28 16:37:57,848 INFO    SenderThread:126881 [sender.py:send_exit():597] send defer
+2024-02-28 16:37:57,848 DEBUG   HandlerThread:126881 [handler.py:handle_request():146] handle_request: defer
+2024-02-28 16:37:57,848 INFO    HandlerThread:126881 [handler.py:handle_request_defer():172] handle defer: 0
+2024-02-28 16:37:57,848 DEBUG   SenderThread:126881 [sender.py:send_request():409] send_request: defer
+2024-02-28 16:37:57,848 INFO    SenderThread:126881 [sender.py:send_request_defer():613] handle sender defer: 0
+2024-02-28 16:37:57,848 INFO    SenderThread:126881 [sender.py:transition_state():617] send defer: 1
+2024-02-28 16:37:57,848 DEBUG   HandlerThread:126881 [handler.py:handle_request():146] handle_request: defer
+2024-02-28 16:37:57,848 INFO    HandlerThread:126881 [handler.py:handle_request_defer():172] handle defer: 1
+2024-02-28 16:37:57,848 DEBUG   SenderThread:126881 [sender.py:send_request():409] send_request: defer
+2024-02-28 16:37:57,848 INFO    SenderThread:126881 [sender.py:send_request_defer():613] handle sender defer: 1
+2024-02-28 16:37:57,848 INFO    SenderThread:126881 [sender.py:transition_state():617] send defer: 2
+2024-02-28 16:37:57,849 DEBUG   HandlerThread:126881 [handler.py:handle_request():146] handle_request: defer
+2024-02-28 16:37:57,849 INFO    HandlerThread:126881 [handler.py:handle_request_defer():172] handle defer: 2
+2024-02-28 16:37:57,849 INFO    HandlerThread:126881 [system_monitor.py:finish():203] Stopping system monitor
+2024-02-28 16:37:57,849 DEBUG   SystemMonitor:126881 [system_monitor.py:_start():172] Starting system metrics aggregation loop
+2024-02-28 16:37:57,849 INFO    HandlerThread:126881 [interfaces.py:finish():202] Joined cpu monitor
+2024-02-28 16:37:57,849 DEBUG   SystemMonitor:126881 [system_monitor.py:_start():179] Finished system metrics aggregation loop
+2024-02-28 16:37:57,849 INFO    HandlerThread:126881 [interfaces.py:finish():202] Joined disk monitor
+2024-02-28 16:37:57,849 DEBUG   SystemMonitor:126881 [system_monitor.py:_start():183] Publishing last batch of metrics
+2024-02-28 16:37:57,919 INFO    HandlerThread:126881 [interfaces.py:finish():202] Joined gpu monitor
+2024-02-28 16:37:57,919 INFO    HandlerThread:126881 [interfaces.py:finish():202] Joined memory monitor
+2024-02-28 16:37:57,919 INFO    HandlerThread:126881 [interfaces.py:finish():202] Joined network monitor
+2024-02-28 16:37:57,920 DEBUG   SenderThread:126881 [sender.py:send_request():409] send_request: defer
+2024-02-28 16:37:57,920 INFO    SenderThread:126881 [sender.py:send_request_defer():613] handle sender defer: 2
+2024-02-28 16:37:57,920 INFO    SenderThread:126881 [sender.py:transition_state():617] send defer: 3
+2024-02-28 16:37:57,920 DEBUG   SenderThread:126881 [sender.py:send():382] send: stats
+2024-02-28 16:37:57,920 DEBUG   HandlerThread:126881 [handler.py:handle_request():146] handle_request: defer
+2024-02-28 16:37:57,920 INFO    HandlerThread:126881 [handler.py:handle_request_defer():172] handle defer: 3
+2024-02-28 16:37:57,921 DEBUG   SenderThread:126881 [sender.py:send_request():409] send_request: defer
+2024-02-28 16:37:57,921 INFO    SenderThread:126881 [sender.py:send_request_defer():613] handle sender defer: 3
+2024-02-28 16:37:57,921 INFO    SenderThread:126881 [sender.py:transition_state():617] send defer: 4
+2024-02-28 16:37:57,921 DEBUG   HandlerThread:126881 [handler.py:handle_request():146] handle_request: defer
+2024-02-28 16:37:57,921 INFO    HandlerThread:126881 [handler.py:handle_request_defer():172] handle defer: 4
+2024-02-28 16:37:57,921 DEBUG   SenderThread:126881 [sender.py:send_request():409] send_request: defer
+2024-02-28 16:37:57,922 INFO    SenderThread:126881 [sender.py:send_request_defer():613] handle sender defer: 4
+2024-02-28 16:37:57,922 INFO    SenderThread:126881 [sender.py:transition_state():617] send defer: 5
+2024-02-28 16:37:57,922 DEBUG   HandlerThread:126881 [handler.py:handle_request():146] handle_request: defer
+2024-02-28 16:37:57,922 INFO    HandlerThread:126881 [handler.py:handle_request_defer():172] handle defer: 5
+2024-02-28 16:37:57,922 DEBUG   SenderThread:126881 [sender.py:send():382] send: summary
+2024-02-28 16:37:57,922 INFO    SenderThread:126881 [sender.py:_save_file():1403] saving file wandb-summary.json with policy end
+2024-02-28 16:37:57,923 DEBUG   SenderThread:126881 [sender.py:send_request():409] send_request: defer
+2024-02-28 16:37:57,923 INFO    SenderThread:126881 [sender.py:send_request_defer():613] handle sender defer: 5
+2024-02-28 16:37:57,923 INFO    SenderThread:126881 [sender.py:transition_state():617] send defer: 6
+2024-02-28 16:37:57,923 DEBUG   HandlerThread:126881 [handler.py:handle_request():146] handle_request: defer
+2024-02-28 16:37:57,923 INFO    HandlerThread:126881 [handler.py:handle_request_defer():172] handle defer: 6
+2024-02-28 16:37:57,923 DEBUG   SenderThread:126881 [sender.py:send_request():409] send_request: defer
+2024-02-28 16:37:57,923 INFO    SenderThread:126881 [sender.py:send_request_defer():613] handle sender defer: 6
+2024-02-28 16:37:57,926 DEBUG   HandlerThread:126881 [handler.py:handle_request():146] handle_request: status_report
+2024-02-28 16:37:58,157 INFO    SenderThread:126881 [sender.py:transition_state():617] send defer: 7
+2024-02-28 16:37:58,157 DEBUG   HandlerThread:126881 [handler.py:handle_request():146] handle_request: defer
+2024-02-28 16:37:58,157 INFO    HandlerThread:126881 [handler.py:handle_request_defer():172] handle defer: 7
+2024-02-28 16:37:58,157 DEBUG   SenderThread:126881 [sender.py:send_request():409] send_request: defer
+2024-02-28 16:37:58,157 INFO    SenderThread:126881 [sender.py:send_request_defer():613] handle sender defer: 7
+2024-02-28 16:37:58,370 INFO    Thread-12 :126881 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/pdi/Documentos/CLEDiffusion-final/CLEDiffusion-final/CLEDiffusion-main/wandb/run-20240228_163740-opyuuamu/files/config.yaml
+2024-02-28 16:37:58,371 INFO    Thread-12 :126881 [dir_watcher.py:_on_file_created():271] file/dir created: /home/pdi/Documentos/CLEDiffusion-final/CLEDiffusion-final/CLEDiffusion-main/wandb/run-20240228_163740-opyuuamu/files/wandb-summary.json
+2024-02-28 16:37:58,847 DEBUG   HandlerThread:126881 [handler.py:handle_request():146] handle_request: poll_exit
+2024-02-28 16:37:59,833 INFO    SenderThread:126881 [sender.py:transition_state():617] send defer: 8
+2024-02-28 16:37:59,833 DEBUG   SenderThread:126881 [sender.py:send_request():409] send_request: poll_exit
+2024-02-28 16:37:59,834 DEBUG   HandlerThread:126881 [handler.py:handle_request():146] handle_request: defer
+2024-02-28 16:37:59,834 INFO    HandlerThread:126881 [handler.py:handle_request_defer():172] handle defer: 8
+2024-02-28 16:37:59,835 DEBUG   SenderThread:126881 [sender.py:send_request():409] send_request: defer
+2024-02-28 16:37:59,835 INFO    SenderThread:126881 [sender.py:send_request_defer():613] handle sender defer: 8
+2024-02-28 16:37:59,835 INFO    SenderThread:126881 [job_builder.py:build():296] Attempting to build job artifact
+2024-02-28 16:37:59,835 INFO    SenderThread:126881 [job_builder.py:_get_source_type():437] no source found
+2024-02-28 16:37:59,835 INFO    SenderThread:126881 [sender.py:transition_state():617] send defer: 9
+2024-02-28 16:37:59,836 DEBUG   HandlerThread:126881 [handler.py:handle_request():146] handle_request: defer
+2024-02-28 16:37:59,836 INFO    HandlerThread:126881 [handler.py:handle_request_defer():172] handle defer: 9
+2024-02-28 16:37:59,836 DEBUG   SenderThread:126881 [sender.py:send_request():409] send_request: defer
+2024-02-28 16:37:59,836 INFO    SenderThread:126881 [sender.py:send_request_defer():613] handle sender defer: 9
+2024-02-28 16:37:59,836 INFO    SenderThread:126881 [dir_watcher.py:finish():358] shutting down directory watcher
+2024-02-28 16:37:59,848 DEBUG   HandlerThread:126881 [handler.py:handle_request():146] handle_request: poll_exit
+2024-02-28 16:38:00,371 INFO    Thread-12 :126881 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/pdi/Documentos/CLEDiffusion-final/CLEDiffusion-final/CLEDiffusion-main/wandb/run-20240228_163740-opyuuamu/files/output.log
+2024-02-28 16:38:00,372 INFO    SenderThread:126881 [dir_watcher.py:finish():388] scan: /home/pdi/Documentos/CLEDiffusion-final/CLEDiffusion-final/CLEDiffusion-main/wandb/run-20240228_163740-opyuuamu/files
+2024-02-28 16:38:00,373 INFO    SenderThread:126881 [dir_watcher.py:finish():402] scan save: /home/pdi/Documentos/CLEDiffusion-final/CLEDiffusion-final/CLEDiffusion-main/wandb/run-20240228_163740-opyuuamu/files/wandb-summary.json wandb-summary.json
+2024-02-28 16:38:00,373 INFO    SenderThread:126881 [dir_watcher.py:finish():402] scan save: /home/pdi/Documentos/CLEDiffusion-final/CLEDiffusion-final/CLEDiffusion-main/wandb/run-20240228_163740-opyuuamu/files/output.log output.log
+2024-02-28 16:38:00,377 INFO    SenderThread:126881 [dir_watcher.py:finish():402] scan save: /home/pdi/Documentos/CLEDiffusion-final/CLEDiffusion-final/CLEDiffusion-main/wandb/run-20240228_163740-opyuuamu/files/conda-environment.yaml conda-environment.yaml
+2024-02-28 16:38:00,377 INFO    SenderThread:126881 [dir_watcher.py:finish():402] scan save: /home/pdi/Documentos/CLEDiffusion-final/CLEDiffusion-final/CLEDiffusion-main/wandb/run-20240228_163740-opyuuamu/files/config.yaml config.yaml
+2024-02-28 16:38:00,378 INFO    SenderThread:126881 [dir_watcher.py:finish():402] scan save: /home/pdi/Documentos/CLEDiffusion-final/CLEDiffusion-final/CLEDiffusion-main/wandb/run-20240228_163740-opyuuamu/files/requirements.txt requirements.txt
+2024-02-28 16:38:00,387 INFO    SenderThread:126881 [dir_watcher.py:finish():402] scan save: /home/pdi/Documentos/CLEDiffusion-final/CLEDiffusion-final/CLEDiffusion-main/wandb/run-20240228_163740-opyuuamu/files/wandb-metadata.json wandb-metadata.json
+2024-02-28 16:38:00,387 INFO    SenderThread:126881 [sender.py:transition_state():617] send defer: 10
+2024-02-28 16:38:00,387 DEBUG   SenderThread:126881 [sender.py:send_request():409] send_request: poll_exit
+2024-02-28 16:38:00,387 DEBUG   HandlerThread:126881 [handler.py:handle_request():146] handle_request: defer
+2024-02-28 16:38:00,387 INFO    HandlerThread:126881 [handler.py:handle_request_defer():172] handle defer: 10
+2024-02-28 16:38:00,390 DEBUG   SenderThread:126881 [sender.py:send_request():409] send_request: defer
+2024-02-28 16:38:00,390 INFO    SenderThread:126881 [sender.py:send_request_defer():613] handle sender defer: 10
+2024-02-28 16:38:00,390 INFO    SenderThread:126881 [file_pusher.py:finish():172] shutting down file pusher
+2024-02-28 16:38:00,809 INFO    wandb-upload_0:126881 [upload_job.py:push():131] Uploaded file /home/pdi/Documentos/CLEDiffusion-final/CLEDiffusion-final/CLEDiffusion-main/wandb/run-20240228_163740-opyuuamu/files/wandb-summary.json
+2024-02-28 16:38:00,849 DEBUG   HandlerThread:126881 [handler.py:handle_request():146] handle_request: poll_exit
+2024-02-28 16:38:00,849 DEBUG   SenderThread:126881 [sender.py:send_request():409] send_request: poll_exit
+2024-02-28 16:38:00,968 INFO    wandb-upload_1:126881 [upload_job.py:push():131] Uploaded file /home/pdi/Documentos/CLEDiffusion-final/CLEDiffusion-final/CLEDiffusion-main/wandb/run-20240228_163740-opyuuamu/files/output.log
+2024-02-28 16:38:01,082 INFO    wandb-upload_3:126881 [upload_job.py:push():131] Uploaded file /home/pdi/Documentos/CLEDiffusion-final/CLEDiffusion-final/CLEDiffusion-main/wandb/run-20240228_163740-opyuuamu/files/config.yaml
+2024-02-28 16:38:01,103 INFO    wandb-upload_2:126881 [upload_job.py:push():131] Uploaded file /home/pdi/Documentos/CLEDiffusion-final/CLEDiffusion-final/CLEDiffusion-main/wandb/run-20240228_163740-opyuuamu/files/conda-environment.yaml
+2024-02-28 16:38:01,106 INFO    wandb-upload_4:126881 [upload_job.py:push():131] Uploaded file /home/pdi/Documentos/CLEDiffusion-final/CLEDiffusion-final/CLEDiffusion-main/wandb/run-20240228_163740-opyuuamu/files/requirements.txt
+2024-02-28 16:38:01,306 INFO    Thread-11 (_thread_body):126881 [sender.py:transition_state():617] send defer: 11
+2024-02-28 16:38:01,306 DEBUG   HandlerThread:126881 [handler.py:handle_request():146] handle_request: defer
+2024-02-28 16:38:01,306 INFO    HandlerThread:126881 [handler.py:handle_request_defer():172] handle defer: 11
+2024-02-28 16:38:01,307 DEBUG   SenderThread:126881 [sender.py:send_request():409] send_request: defer
+2024-02-28 16:38:01,307 INFO    SenderThread:126881 [sender.py:send_request_defer():613] handle sender defer: 11
+2024-02-28 16:38:01,307 INFO    SenderThread:126881 [file_pusher.py:join():178] waiting for file pusher
+2024-02-28 16:38:01,307 INFO    SenderThread:126881 [sender.py:transition_state():617] send defer: 12
+2024-02-28 16:38:01,308 DEBUG   HandlerThread:126881 [handler.py:handle_request():146] handle_request: defer
+2024-02-28 16:38:01,308 INFO    HandlerThread:126881 [handler.py:handle_request_defer():172] handle defer: 12
+2024-02-28 16:38:01,308 DEBUG   SenderThread:126881 [sender.py:send_request():409] send_request: defer
+2024-02-28 16:38:01,308 INFO    SenderThread:126881 [sender.py:send_request_defer():613] handle sender defer: 12
+2024-02-28 16:38:01,308 INFO    SenderThread:126881 [file_stream.py:finish():595] file stream finish called
+2024-02-28 16:38:01,495 INFO    SenderThread:126881 [file_stream.py:finish():599] file stream finish is done
+2024-02-28 16:38:01,495 INFO    SenderThread:126881 [sender.py:transition_state():617] send defer: 13
+2024-02-28 16:38:01,496 DEBUG   HandlerThread:126881 [handler.py:handle_request():146] handle_request: defer
+2024-02-28 16:38:01,496 INFO    HandlerThread:126881 [handler.py:handle_request_defer():172] handle defer: 13
+2024-02-28 16:38:01,496 DEBUG   SenderThread:126881 [sender.py:send_request():409] send_request: defer
+2024-02-28 16:38:01,496 INFO    SenderThread:126881 [sender.py:send_request_defer():613] handle sender defer: 13
+2024-02-28 16:38:01,497 INFO    SenderThread:126881 [sender.py:transition_state():617] send defer: 14
+2024-02-28 16:38:01,497 DEBUG   HandlerThread:126881 [handler.py:handle_request():146] handle_request: defer
+2024-02-28 16:38:01,497 INFO    HandlerThread:126881 [handler.py:handle_request_defer():172] handle defer: 14
+2024-02-28 16:38:01,498 DEBUG   SenderThread:126881 [sender.py:send():382] send: final
+2024-02-28 16:38:01,498 DEBUG   SenderThread:126881 [sender.py:send():382] send: footer
+2024-02-28 16:38:01,498 DEBUG   SenderThread:126881 [sender.py:send_request():409] send_request: defer
+2024-02-28 16:38:01,498 INFO    SenderThread:126881 [sender.py:send_request_defer():613] handle sender defer: 14
+2024-02-28 16:38:01,499 DEBUG   HandlerThread:126881 [handler.py:handle_request():146] handle_request: poll_exit
+2024-02-28 16:38:01,500 DEBUG   SenderThread:126881 [sender.py:send_request():409] send_request: poll_exit
+2024-02-28 16:38:01,501 DEBUG   HandlerThread:126881 [handler.py:handle_request():146] handle_request: poll_exit
+2024-02-28 16:38:01,501 DEBUG   SenderThread:126881 [sender.py:send_request():409] send_request: poll_exit
+2024-02-28 16:38:01,502 DEBUG   HandlerThread:126881 [handler.py:handle_request():146] handle_request: server_info
+2024-02-28 16:38:01,503 DEBUG   SenderThread:126881 [sender.py:send_request():409] send_request: server_info
+2024-02-28 16:38:01,506 DEBUG   HandlerThread:126881 [handler.py:handle_request():146] handle_request: get_summary
+2024-02-28 16:38:01,506 DEBUG   HandlerThread:126881 [handler.py:handle_request():146] handle_request: sampled_history
+2024-02-28 16:38:01,507 DEBUG   HandlerThread:126881 [handler.py:handle_request():146] handle_request: internal_messages
+2024-02-28 16:38:01,507 DEBUG   HandlerThread:126881 [handler.py:handle_request():146] handle_request: job_info
+2024-02-28 16:38:01,687 DEBUG   SenderThread:126881 [sender.py:send_request():409] send_request: job_info
+2024-02-28 16:38:01,688 INFO    MainThread:126881 [wandb_run.py:_footer_history_summary_info():3866] rendering history
+2024-02-28 16:38:01,688 INFO    MainThread:126881 [wandb_run.py:_footer_history_summary_info():3898] rendering summary
+2024-02-28 16:38:01,688 INFO    MainThread:126881 [wandb_run.py:_footer_sync_info():3825] logging synced files
+2024-02-28 16:38:01,688 DEBUG   HandlerThread:126881 [handler.py:handle_request():146] handle_request: shutdown
+2024-02-28 16:38:01,689 INFO    HandlerThread:126881 [handler.py:finish():869] shutting down handler
+2024-02-28 16:38:02,508 INFO    WriterThread:126881 [datastore.py:close():296] close: /home/pdi/Documentos/CLEDiffusion-final/CLEDiffusion-final/CLEDiffusion-main/wandb/run-20240228_163740-opyuuamu/run-opyuuamu.wandb
+2024-02-28 16:38:02,688 INFO    SenderThread:126881 [sender.py:finish():1572] shutting down sender
+2024-02-28 16:38:02,688 INFO    SenderThread:126881 [file_pusher.py:finish():172] shutting down file pusher
+2024-02-28 16:38:02,688 INFO    SenderThread:126881 [file_pusher.py:join():178] waiting for file pusher

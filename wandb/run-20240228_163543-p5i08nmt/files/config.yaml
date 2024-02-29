@@ -1,0 +1,48 @@
+wandb_version: 1
+
+dataset_path:
+  desc: null
+  value: ./data/LOL/
+state:
+  desc: null
+  value: train
+pretrained_path:
+  desc: null
+  value: null
+output_path:
+  desc: null
+  value: ./output/
+_wandb:
+  desc: null
+  value:
+    python_version: 3.11.0
+    cli_version: 0.16.3
+    framework: torch
+    is_jupyter_run: false
+    is_kaggle_kernel: false
+    start_time: 1709148943.411462
+    t:
+      1:
+      - 1
+      - 5
+      - 41
+      - 53
+      - 55
+      - 79
+      - 80
+      2:
+      - 1
+      - 5
+      - 41
+      - 53
+      - 55
+      - 79
+      - 80
+      3:
+      - 16
+      - 23
+      4: 3.11.0
+      5: 0.16.3
+      8:
+      - 5
+      13: linux-x86_64

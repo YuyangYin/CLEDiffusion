@@ -1,0 +1,82 @@
+{
+    "os": "Linux-5.15.0-97-generic-x86_64-with-glibc2.31",
+    "python": "3.11.0",
+    "heartbeatAt": "2024-02-28T19:37:41.552150",
+    "startedAt": "2024-02-28T19:37:40.819518",
+    "docker": null,
+    "cuda": null,
+    "args": [],
+    "state": "running",
+    "program": "/home/pdi/Documentos/CLEDiffusion-final/CLEDiffusion-final/CLEDiffusion-main/train.py",
+    "codePathLocal": "train.py",
+    "codePath": "train.py",
+    "host": "pdi-desktop",
+    "username": "pdi",
+    "executable": "/home/pdi/anaconda3/envs/CLEDiff/bin/python",
+    "cpu_count": 4,
+    "cpu_count_logical": 8,
+    "cpu_freq": {
+        "current": 2.0420000000000003,
+        "min": 1600.0,
+        "max": 3900.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 1.7,
+            "min": 1600.0,
+            "max": 3900.0
+        },
+        {
+            "current": 1.6,
+            "min": 1600.0,
+            "max": 3900.0
+        },
+        {
+            "current": 1.6,
+            "min": 1600.0,
+            "max": 3900.0
+        },
+        {
+            "current": 1.6,
+            "min": 1600.0,
+            "max": 3900.0
+        },
+        {
+            "current": 3.829,
+            "min": 1600.0,
+            "max": 3900.0
+        },
+        {
+            "current": 1.7,
+            "min": 1600.0,
+            "max": 3900.0
+        },
+        {
+            "current": 2.707,
+            "min": 1600.0,
+            "max": 3900.0
+        },
+        {
+            "current": 1.6,
+            "min": 1600.0,
+            "max": 3900.0
+        }
+    ],
+    "disk": {
+        "/": {
+            "total": 878.6833457946777,
+            "used": 207.11960220336914
+        }
+    },
+    "gpu": "NVIDIA TITAN X (Pascal)",
+    "gpu_count": 1,
+    "gpu_devices": [
+        {
+            "name": "NVIDIA TITAN X (Pascal)",
+            "memory_total": 12884901888
+        }
+    ],
+    "memory": {
+        "total": 15.563858032226562
+    }
+}

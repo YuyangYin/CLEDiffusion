@@ -180,8 +180,8 @@ def get_color_map(im):
     return im / (rgb2gray(im)[..., np.newaxis] + 1e-6) * 100
     # return im / (np.mean(im, axis=-1)[..., np.newaxis] + 1e-6) * 100
 
-
-def convert_to_grayscale(image):
+#rgb_to_grayscale_channel_multiplication
+def rgb_to_grayscale_channel_multiplication(image):
     gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     return gray_image
 
@@ -201,8 +201,8 @@ def train(modelConfig: Dict):
         torch.cuda.set_device(local_rank)
         dist.init_process_group(backend='nccl')
         device = torch.device("cuda", local_rank)
-    datapath_train_low = glob.glob(r'/home/yyy/data/Dataset/LOL/our485/low/*.png')
-    datapath_train_high = glob.glob(r'/home/yyy/data/Dataset/LOL/our485/high/*.png')
+    datapath_train_low = glob.glob(r'/home/pdi/Documentos/CLEDiffusion-final/CLEDiffusion-final/CLEDiffusion-main/data/SUIM/train_val*.jpg')
+    datapath_train_high = glob.glob(r'/home/pdi/Documentos/CLEDiffusion-final/CLEDiffusion-final/CLEDiffusion-main/data/SUIM//*.jpg')
 
     dataload_train=load_data(datapath_train_low, datapath_train_high)
     if modelConfig["DDP"] == True:
@@ -332,8 +332,8 @@ def train(modelConfig: Dict):
 def Test(modelConfig: Dict,epoch):
     # load model and evaluate
     device = modelConfig['device_list'][0]
-    datapath_test_low = glob.glob(r'/home/yyy/data/Dataset/LOL/eval15/low/*.png')
-    datapath_test_high = glob.glob(r'/home/yyy/data/Dataset/LOL/eval15/high/*.png')
+    datapath_test_low = glob.glob(r'/home/yyy/data/Dataset/LOL/eval15/low/*.jpg')
+    datapath_test_high = glob.glob(r'/home/yyy/data/Dataset/LOL/eval15/high/*.jpg')
     dataload_test = load_data_test(datapath_test_low,datapath_test_high)
     dataloader = DataLoader(dataload_test, batch_size=1, num_workers=4,
                             drop_last=True, pin_memory=True)
@@ -472,7 +472,7 @@ if __name__== "__main__" :
         "beta_T": 0.02,
         "img_size": 32,
         "grad_clip": 1.,
-        "device": "cuda:1",
+        "device": "cuda:0", #MODIFIQUEI
         "device_list": [1],
         #"device_list": [3,2,1,0],
         "training_load_weight": True,

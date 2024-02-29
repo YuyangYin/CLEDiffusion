@@ -1,0 +1,28 @@
+Namespace(dataset_path='./data/LOL/', state='train', pretrained_path=None, output_path='./output/', DDP=False, epoch=10001, batch_size=16, T=1000, channel=128, channel_mult=[1, 2, 3, 4], attn=[2], num_res_blocks=2, dropout=0.15, lr=5e-05, multiplier=2.0, beta_1=0.0001, beta_T=0.02, img_size=32, grad_clip=1.0, device='cuda:0', device_list=[1], ddim=True, unconditional_guidance_scale=1, ddim_step=100)
+Total training examples: 485
+Traceback (most recent call last):
+  File "/home/pdi/Documentos/CLEDiffusion-final/CLEDiffusion-final/CLEDiffusion-main/train.py", line 502, in <module>
+    train(config)
+  File "/home/pdi/Documentos/CLEDiffusion-final/CLEDiffusion-final/CLEDiffusion-main/train.py", line 228, in train
+    net_model=torch.nn.DataParallel(net_model,device_ids=config.device_list)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pdi/anaconda3/envs/CLEDiff/lib/python3.11/site-packages/torch/nn/parallel/data_parallel.py", line 159, in __init__
+    _check_balance(self.device_ids)
+  File "/home/pdi/anaconda3/envs/CLEDiff/lib/python3.11/site-packages/torch/nn/parallel/data_parallel.py", line 26, in _check_balance
+    dev_props = _get_devices_properties(device_ids)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pdi/anaconda3/envs/CLEDiff/lib/python3.11/site-packages/torch/_utils.py", line 762, in _get_devices_properties
+    return [_get_device_attr(lambda m: m.get_device_properties(i)) for i in device_ids]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pdi/anaconda3/envs/CLEDiff/lib/python3.11/site-packages/torch/_utils.py", line 762, in <listcomp>
+    return [_get_device_attr(lambda m: m.get_device_properties(i)) for i in device_ids]
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pdi/anaconda3/envs/CLEDiff/lib/python3.11/site-packages/torch/_utils.py", line 741, in _get_device_attr
+    return get_member(torch.cuda)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pdi/anaconda3/envs/CLEDiff/lib/python3.11/site-packages/torch/_utils.py", line 762, in <lambda>
+    return [_get_device_attr(lambda m: m.get_device_properties(i)) for i in device_ids]
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pdi/anaconda3/envs/CLEDiff/lib/python3.11/site-packages/torch/cuda/__init__.py", line 456, in get_device_properties
+    raise AssertionError("Invalid device id")
+AssertionError: Invalid device id
